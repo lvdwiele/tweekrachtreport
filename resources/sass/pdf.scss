@@ -1,0 +1,542 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap');
+
+@page {
+    size: A4;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    margin: 0px;
+}
+
+.content {
+    margin-left: 65px;
+    margin-right: 75px;
+}
+
+.page-break {
+    page-break-after: always;
+}
+
+.header {
+    width: 101%;
+    height: 150px;
+    top: -100px;
+    left: -50px;
+}
+
+.row {
+    display: inline-block;
+}
+
+.float {
+    margin-left: 20%;
+    position: relative;
+    z-index: 999;
+    background-color: #55c3e9;
+}
+
+.kleurvlak {
+    height: 890px;
+    width: 101%;
+    background-color: #55c3e9;
+    bottom: 0px;
+    position: absolute;
+    padding-top: 50px;
+}
+
+.kleurvlak2 {
+    height: 890px;
+    width: 101%;
+    background-color: #e6007d;
+    bottom: 0px;
+    position: absolute;
+    padding-top: 50px;
+}
+
+.logo {
+    padding-top: 60px;
+    margin-left: 215px;
+    height: 50px;
+    width: 370px;
+}
+
+.titel {
+    margin-bottom: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    margin-bottom: 0;
+}
+
+.kaarten {
+    height: 280px;
+    width: 700px;
+    margin-left: 50px;
+}
+
+.witregel {
+    height: 50px;
+    width: 100%;
+}
+
+.container {
+    position: relative;
+    width: 80%;
+    margin-left: 150px;
+    margin-top: 200px;
+    text-align: center;
+}
+
+.container2 {
+    position: relative;
+    width: 80%;
+    text-align: center;
+    padding-left: 32px;
+    margin-top: 100px;
+}
+
+.container3 {
+    position: relative;
+    width: 80%;
+    margin-left: 150px;
+    margin-top: 200px;
+}
+
+.diamantrel {
+    height: 85mm;
+    width: 100mm;
+    display: block;
+    margin: auto auto auto 60px;
+    position: relative;
+}
+
+.diamant {
+    height: 85mm;
+    width: 100mm;
+    display: block;
+    margin: auto auto auto 60px;
+}
+
+.denkvrouw {
+    float: right;
+    margin-top: 12.5px;
+}
+
+.roltrappen {
+    width: 100%;
+    margin-top: 80.5px;
+    z-index: -1;
+}
+
+.jarigmeisje {
+    width: 100%;
+    margin-top: 136.5px;
+}
+
+.fullimage {
+    width: 100%;
+    position: absolute;
+    top: 115px;
+}
+
+.links {
+    position: absolute;
+    left: -400;
+    top: 65px;
+}
+
+.rechts {
+    position: absolute;
+    right: -200;
+    top: 65px;
+}
+
+.boven {
+    position: absolute;
+    top: -45;
+    left: -100;
+    font-family: "Helvetica Neue", sans-serif;
+    font-size: 25px;
+    text-transform: uppercase;
+}
+
+.onder {
+    position: absolute;
+    top: 165px;
+    left: -100;
+    font-family: "Helvetica Neue", sans-serif;
+    font-size: 25px;
+    text-transform: uppercase;
+}
+
+.uptekst {
+    top: 400px;
+    position: absolute;
+}
+
+.vak {
+    display: inline-block;
+    width: 52mm;
+    height: 48mm;
+    background-color: #55c3e9;
+    margin: 5px;
+    border-radius: 25px;
+    padding: 20px 14px 14px;
+    top: 0;
+}
+
+.eerstevak {
+    display: inline-block;
+    width: 52mm;
+    height: 48mm;
+    background-color: #55c3e9;
+    margin: 5px;
+    border-radius: 25px;
+    padding: 20px 14px 14px;
+    top: 0;
+}
+
+.vak2 {
+    z-index: 999;
+    margin-top: 60px;
+    margin-left: 60px;
+    width: 210px;
+    height: 220px;
+    padding: 20px;
+    background-color: #e5007d;
+    border-radius: 25px;
+}
+
+.floatingvak {
+    z-index: 999;
+    margin-top: 60px;
+    margin-left: 60px;
+    width: 210px;
+    height: 220px;
+    padding: 20px;
+    background-color: #55c3e9;
+    border-radius: 25px;
+}
+
+.krachtenTabel {
+    width: 100%;
+}
+
+.krachtenTabelregel {
+    width: 100%;
+    height: 25px;
+    margin-top: 5px;
+    border: 1px solid black;
+}
+
+.krachtenTabelKracht {
+    width: 20%;
+    height: 25px;
+    float: left;
+    padding-top: 2px;
+    padding-left: 10px;
+    border-right: 1px solid black;
+}
+
+.krachtenTabelInvul {
+    width: 75%;
+    float: right;
+}
+
+.tablecell0 {
+    background: rgba(241, 3, 3, 0.4);
+    border-right: 1px solid white;
+}
+
+.tablecell1 {
+    background: rgba(11, 153, 54, 0.5);;
+    border-right: 1px solid white;
+}
+
+.tablecell2 {
+    background: rgba(11, 153, 54, 0.6);
+    border-right: 1px solid white;
+}
+
+.tablecell3 {
+    background: rgba(11, 153, 54, 0.7);
+    border-right: 1px solid white;
+}
+
+.tablecell4 {
+    background: rgba(11, 153, 54, 0.8);
+    border-right: 1px solid white;
+}
+
+.tablecell5 {
+    background: rgba(11, 153, 54, 0.9);
+    border-right: 1px solid white;
+}
+
+.tablecell6 {
+    background: rgba(11, 153, 54);
+}
+
+
+.enkelInvul {
+    border: 1px solid #dfdedd !important;
+    height: 25px;
+    width: 275px;
+    margin-right: 5px;
+    margin-top: 5px;
+    display: inline-block;
+    background-color: #dfdedd !important;
+}
+
+.grootInvul {
+    height: 150px;
+    width: 100%;
+    background-color: #dfdedd !important;
+}
+
+.groterInvul {
+    margin-top: 10px;
+    height: 215px;
+    width: 100%;
+    background-color: #dfdedd !important;
+}
+
+.invulBreed {
+    height: 25px;
+    width: 100%;
+    border: 1px solid #dfdedd !important;
+    background-color: #dfdedd !important;
+}
+
+.InvulContainer {
+    display: inline;
+    width: 600px;
+    position: relative;
+}
+
+.selecties {
+    width: 400px;
+    height: 30px;
+}
+
+.selectie {
+    margin-right: 10px;
+    display: inline-block;
+}
+
+.copywrite {
+    width: 100%;
+    padding: 10px;
+    position: absolute;
+    bottom: 0;
+}
+
+.helltekst {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+
+.wit {
+    color: white;
+}
+
+.roze {
+    color: #e5007d;
+}
+
+.grijs {
+    color: #8A8A8A;
+}
+
+.copy {
+    font-size: 10px;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.justify {
+    text-align: justify;
+}
+
+.centertekst {
+    text-align: center;
+}
+
+.Font10 {
+    font-family: "Helvetica Neue", sans-serif;
+    font-size: 9px;
+    padding: 5px;
+    line-height: 1.4;
+    word-break: keep-all;
+}
+
+.Font12 {
+    font-family: "Montserrat", serif;
+    font-weight: 900;
+    text-transform: uppercase;
+    font-size: 12px;
+}
+
+.Font12 b {
+    font-family: "Montserrat", serif;
+    font-weight: 900;
+    text-transform: uppercase;
+    font-size: 12px;
+}
+
+.Font14 {
+    font-family: "Montserrat", serif;
+    font-weight: 900;
+    text-transform: uppercase;
+    font-size: 14px;
+    line-height: 1;
+}
+
+.Font15 {
+    font-family: "Montserrat", serif;
+    font-weight: 900;
+    text-transform: uppercase;
+    font-size: 15px;
+    margin-top: 500px;
+}
+
+.Font18 {
+    font-family: "Montserrat", serif;
+    font-weight: 900;
+    text-transform: uppercase;
+    font-size: 17.2px;
+    line-height: 1;
+}
+
+.Font20 {
+    font-family: "Montserrat", serif;
+    font-weight: 900;
+    text-transform: uppercase;
+    font-size: 20px;
+}
+
+.Font24 {
+    font-family: "Montserrat", serif;
+    font-weight: 900;
+    text-transform: uppercase;
+    font-size: 24px;
+}
+
+.Font26 {
+    font-family: "Montserrat", serif;
+    font-weight: 900;
+    text-transform: uppercase;
+    font-size: 26px;
+}
+
+.Font27 {
+    font-family: "Montserrat", serif;
+    text-transform: uppercase;
+    font-size: 27px;
+}
+
+.Font29 {
+    font-family: "Montserrat", serif;
+    font-weight: 900;
+    text-transform: uppercase;
+    font-size: 29px;
+}
+
+.Font37 {
+    font-family: "Montserrat", serif;
+    font-weight: 900;
+    text-transform: uppercase;
+    font-size: 37px;
+    text-align: center;
+    line-height: 1;
+}
+
+.Font50 {
+    font-family: "Montserrat", serif;
+    text-transform: uppercase;
+    font-size: 50px;
+    font-weight: 900;
+}
+
+.Font70 {
+    font-family: "Montserrat", serif;
+    text-transform: uppercase;
+    font-size: 70px;
+    font-weight: 900;
+    text-align: center;
+    line-height: 1;
+}
+
+h1 {
+    font-family: "Montserrat", serif;
+    text-transform: uppercase;
+    font-size: 20px;
+    font-weight: 900;
+}
+
+h2 {
+    color: white;
+    font-size: 70px;
+    margin: 0;
+    padding: 0;
+}
+
+h3, h4, h5 {
+    color: white;
+    font-weight: 900;
+    margin: 0;
+    padding: 0;
+    font-family: "Montserrat", sans-serif;
+    justify-content: center;
+    text-align: center;
+}
+
+h6 {
+    color: black;
+    font-size: 24px;
+    font-weight: 900;
+    margin: 0;
+    padding: 0;
+    font-family: "Montserrat", sans-serif;
+}
+
+ul {
+    list-style-image: url('/images/logowhite.png');
+}
+
+.tabeltekst {
+    font-size: 10px;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    margin-right: 10px;
+    display: inline;
+}
+
+.groottekst {
+    font-family: "Montserrat", serif;
+    text-transform: uppercase;
+    font-size: 40px;
+    font-weight: 900;
+    text-align: center;
+}
+
+.normaaltekst {
+    font-size: 10px;
+    text-align: justify;
+    text-justify: inter-word;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.normaaltekst2 {
+    font-size: 10px;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.regelafstandtekst {
+    font-size: 10px;
+    line-height: 1.65;
+    text-align: justify;
+    text-justify: inter-word;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}

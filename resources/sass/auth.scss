@@ -1,0 +1,50 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Raleway:300,400,600');
+
+@import '~@fortawesome/fontawesome-free/scss/fontawesome';
+@import '~@fortawesome/fontawesome-free/scss/solid';
+@import '~@fortawesome/fontawesome-free/scss/regular';
+@import '~bootstrap/scss/bootstrap';
+
+// Variables
+@import 'variables';
+
+.bg-dark-40 {
+    background-color: rgba($dark, 0.4);
+}
+
+body {
+    font-family: Raleway, sans-serif;
+    font-size: 14px;
+    background: url('../../public/images/backgroundimage.png') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+a,
+a:hover,
+a:focus {
+    color: inherit;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+.vertical-center {
+    margin: 0;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.bg-trans-75 {
+    background: rgba(255,255,255, .75);
+}
+
+.border-125 {
+    border-radius: 1.25rem;
+}
