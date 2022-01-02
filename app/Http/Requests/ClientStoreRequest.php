@@ -17,7 +17,7 @@ final class ClientStoreRequest extends FormRequest
         return [
             'first_name' => 'required|max:255',
             'last_name' => 'required|max:255',
-            'email' => 'required|unique:clients|email',
+            'email' => 'nullable|email',
             'address' => 'nullable|max:255',
             'place' => 'nullable|max:255',
             'zip_code' => 'nullable|max:20',

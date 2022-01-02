@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -37,6 +38,7 @@ use Illuminate\Notifications\Notifiable;
 final class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
+    use HasFactory;
 
     public const RATE_100 = 100.00;
     public const RATE_50 = 50.00;
@@ -52,7 +54,8 @@ final class User extends Authenticatable implements MustVerifyEmail
         'name',
         'email',
         'password',
-        'phone_number'
+        'phone_number',
+        'email_verified_at',
     ];
 
     /**
@@ -112,7 +115,9 @@ final class User extends Authenticatable implements MustVerifyEmail
     public function getReportsCount(): int
     {
         $returned = 0;
-        $clients = $this->clients()->with('report')->get();
+        $clients = $this->clients()
+            ->with('report')
+            ->get();
 
         foreach ($clients as $client) {
             if ($client->report !== null) {
@@ -146,9 +151,11 @@ final class User extends Authenticatable implements MustVerifyEmail
     public function getReportsCountAttribute(): int
     {
         return $this->clients()
-            ->with(['report' => function (Builder $query) {
-                $query->where('report.id', '!=', null);
-            }])
+            ->with([
+                'report' => function (Builder $query) {
+                    $query->where('report.id', '!=', null);
+                },
+            ])
             ->count();
     }
 
@@ -195,6 +202,7 @@ final class User extends Authenticatable implements MustVerifyEmail
 
     public function getFormattedCreatedAtAttribute(): string
     {
-        return Carbon::createFromTimestamp($this->created_at)->toFormattedDateString();
+        return Carbon::createFromTimestamp($this->created_at)
+            ->toFormattedDateString();
     }
 }

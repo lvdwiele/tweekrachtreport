@@ -17,25 +17,28 @@
                     <div class="row form-group">
                         <div class="col-md-6">
                             <label for="first_name">Voornaam: *</label>
-                            <input type="text" id="first_name" name="first_name" value="{{ $client->first_name }}"
+                            <input type="text" id="first_name" name="first_name"
+                                   value="{{ old('first_name', $client->first_name) }}"
                                    class="form-control">
                         </div>
                         <div class="col-md-6">
                             <label for="last_name">Achternaam: *</label>
-                            <input type="text" id="last_name" name="last_name" value="{{ $client->last_name }}"
+                            <input type="text" id="last_name" name="last_name"
+                                   value="{{ old('last_name', $client->last_name) }}"
                                    class="form-control">
                         </div>
                     </div>
                     <div class="row form-group">
                         <div class="col-md-6">
-                            <label for="email">E-mail: *</label>
-                            <input type="email" id="email" name="email" value="{{ $client->email }}"
+                            <label for="email">E-mail:</label>
+                            <input type="email" id="email" name="email"
+                                   value="{{ old('email', $client->email) }}"
                                    class="form-control">
                         </div>
                         <div class="col-md-6">
                             <label for="phone_number">Telefoon:</label>
                             <input type="text" id="phone_number" name="phone_number"
-                                   value="{{ $client->phone_number }}"
+                                   value="{{ old('phone_number', $client->phone_number) }}"
                                    class="form-control">
                         </div>
                     </div>
@@ -43,7 +46,8 @@
                     <div class="row form-group">
                         <div class="col-md-12">
                             <label for="address">Adress:</label>
-                            <input type="text" id="address" name="address" value="{{ $client->address }}"
+                            <input type="text" id="address" name="address"
+                                   value="{{ old('address', $client->address) }}"
                                    class="form-control">
                         </div>
                     </div>
@@ -51,24 +55,29 @@
                     <div class="row form-group">
                         <div class="col-md-6">
                             <label for="place">Woonplaats:</label>
-                            <input type="text" id="place" name="place" value="{{ $client->place }}"
+                            <input type="text" id="place" name="place"
+                                   value="{{ old('place', $client->place) }}"
                                    class="form-control">
                         </div>
                         <div class="col-md-6">
                             <label for="zip_code">Postcode:</label>
-                            <input type="text" id="zip_code" name="zip_code" value="{{ $client->zip_code }}"
+                            <input type="text" id="zip_code" name="zip_code"
+                                   value="{{ old('zip_code', $client->zip_code) }}"
                                    class="form-control">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="company">Bedrijf:</label>
-                        <select type="text" id="company" name="company_id" class="form-control selectpicker"
+                        <select type="text" id="company" name="company_id"
+                                class="form-control selectpicker"
                                 data-live-search="true">
                             <option value="">-- Selecteer een bedrijf --</option>
                             @foreach($companies as $company)
-                                <option value="{{ $company->id }}"
-                                @isset($client->company){{ $company->id === $client->company->id ? 'selected' : '' }}@endisset>
+                                <option
+                                    value="{{ $company->id }}"
+                                    {{ old('company_id', $client->company_id) == $company->id ? 'selected' : '' }}
+                                >
                                     {{ $company->name }}
                                 </option>
                             @endforeach
@@ -91,13 +100,15 @@
                     @else
                         <div class="form-group">
                             <label for="core_power_1">Kernkracht 1: *</label>
-                            <select id="core_power_1" name="core_power_1" class="form-control selectpicker"
+                            <select id="core_power_1" name="core_power_1"
+                                    class="form-control selectpicker"
                                     data-live-search="true" required>
                                 <option value="">- Selecteer eerste kernkracht -</option>
                                 @foreach($corePowers as $corePower)
                                     <option
-                                        @if(isset($firstCorePower) && $corePower->id === $firstCorePower->id) selected
-                                        @endif value="{{ $corePower->id }}">
+                                        {{ old('core_power_1', $client->core_power_1) == $corePower->id ? 'selected' : '' }}
+                                        value="{{ $corePower->id }}"
+                                    >
                                         {{ $corePower->display_name }}
                                     </option>
                                 @endforeach
@@ -106,13 +117,15 @@
 
                         <div class="form-group">
                             <label for="core_power_2">Kernkracht 2: *</label>
-                            <select id="core_power_2" name="core_power_2" class="form-control selectpicker"
+                            <select id="core_power_2" name="core_power_2"
+                                    class="form-control selectpicker"
                                     data-live-search="true" required>
                                 <option value="">- Selecteer tweede kernkracht -</option>
                                 @foreach($corePowers as $corePower)
                                     <option
-                                        @if(isset($secondCorePower) && $corePower->id === $secondCorePower->id) selected
-                                        @endif value="{{ $corePower->id }}">
+                                        {{ old('core_power_2', $client->core_power_2) == $corePower->id ? 'selected' : '' }}
+                                        value="{{ $corePower->id }}"
+                                    >
                                         {{ $corePower->display_name }}
                                     </option>
                                 @endforeach

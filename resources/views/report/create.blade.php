@@ -19,11 +19,13 @@
                                 <label for="first_support_power">
                                     {{ __('report.labels.support_power_is_not_chosen') }}
                                 </label>
-                                <select type="text" id="first_support_power" name="first_support_power"
+                                <select type="text" id="first_support_power"
+                                        name="first_support_power"
                                         class="form-control">
                                     <option>{{ __('report.create.please_make_a_choice') }}</option>
                                     @foreach($firstSupportPowers as $supportPower)
-                                        <option value="{{ $supportPower->id }}">
+                                        <option
+                                            value="{{ $supportPower->id }}" {{ old('first_support_power') == $supportPower->id ? 'selected' : '' }}>
                                             {{ $supportPower->display_name }}
                                         </option>
                                     @endforeach
@@ -33,7 +35,8 @@
                                     {{ __('report.labels.support_power_is_chosen') }}
                                 </label>
                                 <input type="text" id="first_support_power" class="form-control"
-                                       value="{{ $firstSupportPowers->first()->display_name }}" disabled>
+                                       value="{{ $firstSupportPowers->first()->display_name }}"
+                                       disabled>
                                 <input type="hidden" name="first_support_power"
                                        value="{{ $firstSupportPowers->first()->id }}">
                             @endif
@@ -43,12 +46,14 @@
                                 <label for="second_support_power">
                                     {{ __('report.labels.support_power_is_not_chosen') }}
                                 </label>
-                                <select type="text" id="second_support_power" name="second_support_power"
+                                <select type="text" id="second_support_power"
+                                        name="second_support_power"
                                         class="form-control">
                                     <option>{{ __('report.create.please_make_a_choice') }}</option>
                                     @foreach($secondSupportPowers as $supportPower)
-                                        <option
-                                            value="{{ $supportPower->id }}">{{ $supportPower->display_name }}</option>
+                                        <option value="{{ $supportPower->id }}" {{ old('second_support_power') == $supportPower->id ? 'selected' : '' }}>
+                                            {{ $supportPower->display_name }}
+                                        </option>
                                     @endforeach
                                 </select>
                             @elseif($secondSupportPowers->count() === 1)
@@ -56,7 +61,8 @@
                                     {{ __('report.labels.support_power_is_chosen') }}
                                 </label>
                                 <input type="text" id="second_support_power" class="form-control"
-                                       value="{{ $secondSupportPowers->first()->display_name }}" disabled>
+                                       value="{{ $secondSupportPowers->first()->display_name }}"
+                                       disabled>
                                 <input type="hidden" name="second_support_power"
                                        value="{{ $secondSupportPowers->first()->id }}">
                             @endif
@@ -64,7 +70,8 @@
                     </div>
 
                     <div class="form-group">
-                        <button type="submit" class="btn btn-success">{{ __('report.create.submit_button') }}</button>
+                        <button type="submit"
+                                class="btn btn-success">{{ __('report.create.submit_button') }}</button>
                     </div>
                 </form>
             </div>

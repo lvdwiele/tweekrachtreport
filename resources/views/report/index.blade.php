@@ -72,7 +72,7 @@
                         @endforeach
                         </tbody>
                     </table>
-                    {{ $reports->links() }}
+                    {{ $reports->onEachSide(2)->links() }}
                 </div>
             </div>
         </div>

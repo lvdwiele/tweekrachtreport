@@ -27,9 +27,9 @@
                     </div>
                     <div class="row form-group">
                         <div class="col-md-6">
-                            <label for="email">E-mail: *</label>
+                            <label for="email">E-mail:</label>
                             <input type="email" id="email" name="email" value="{{ old('email') }}"
-                                   class="form-control" required>
+                                   class="form-control">
                         </div>
                         <div class="col-md-6">
                             <label for="phone_number">Telefoon:</label>
@@ -64,9 +64,9 @@
                         <label for="company">Bedrijf:</label>
                         <select type="text" id="company" name="company_id" class="form-control selectpicker"
                                 data-live-search="true">
-                            <option value="">- Geen bedrijf geselecteerd -</option>
+                            <option value="" {{ !old('company_id') ? 'selected' : '' }}>- Geen bedrijf geselecteerd -</option>
                             @foreach($companies as $company)
-                                <option value="{{ $company->id }}">
+                                <option value="{{ $company->id }}" {{ old('company_id') == $company->id ? 'selected' : '' }}>
                                     {{ $company->name }}
                                 </option>
                             @endforeach
@@ -79,7 +79,7 @@
                                 data-live-search="true" required>
                             <option value="">- Selecteer eerste kernkracht -</option>
                             @foreach($corePowers as $corePower)
-                                <option value="{{ $corePower->id }}">
+                                <option value="{{ $corePower->id }}" {{ old('core_power_1') == $corePower->id ? 'selected' : '' }}>
                                     {{ $corePower->display_name }}
                                 </option>
                             @endforeach
@@ -92,7 +92,7 @@
                                 data-live-search="true" required>
                             <option value="">- Selecteer tweede kernkracht -</option>
                             @foreach($corePowers as $corePower)
-                                <option value="{{ $corePower->id }}">
+                                <option value="{{ $corePower->id }}" {{ old('core_power_2') == $corePower->id ? 'selected' : '' }}>
                                     {{ $corePower->display_name }}
                                 </option>
                             @endforeach

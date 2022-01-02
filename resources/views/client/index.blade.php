@@ -72,7 +72,7 @@
                     @endforeach
                     </tbody>
                 </table>
-                {{ $clients->links() }}
+                {{ $clients->onEachSide(2)->links() }}
             </div>
         </div>
     </div>

@@ -45,7 +45,7 @@
                     @endforeach
                     </tbody>
                 </table>
-                {{ $companies->links() }}
+                {{ $companies->onEachSide(2)->links() }}
             </div>
         </div>
     </div>

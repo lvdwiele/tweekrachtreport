@@ -17,7 +17,7 @@ final class ClientUpdateRequest extends FormRequest
         return [
             'first_name' => 'required|max:25',
             'last_name' => 'required|max:25',
-            'email' => 'required|email',
+            'email' => 'nullable|email',
             'address' => 'nullable|max:50',
             'place' => 'nullable|max:20',
             'zip_code' => 'nullable|max:20',

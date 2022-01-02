@@ -17,7 +17,7 @@ final class ClientDto
         int $core_power_2,
         public string $first_name,
         public string $last_name,
-        public string $email,
+        public ?string $email = null,
         public ?int $company_id = null,
         public ?string $address = null,
         public ?string $zip_code = null,

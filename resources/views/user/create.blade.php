@@ -43,9 +43,9 @@
                     <div class="form-group">
                         <label for="role">{{ __('user.labels.role') }}</label>
                         <select id="role" name="role_id" class="form-control @error('role_id') is-invalid @enderror" required>
-                            <option value="" selected>{{__('user.create.make_a_choice')  }}</option>
+                            <option value="">{{__('user.create.make_a_choice')  }}</option>
                             @foreach ($roles as $role)
-                                <option value="{{ $role->id }}">{{ $role->name }}</option>
+                                <option value="{{ $role->id }}" {{ old('role_id') == $role->id ? 'selected' : '' }}>{{ $role->name }}</option>
                             @endforeach
                         </select>
                         @error('role_id')

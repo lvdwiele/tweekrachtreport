@@ -2,19 +2,15 @@
 
 namespace App\Console\Commands;
 
-use App\Jobs\Report\StoreReportPdfInFileSystem;
 use App\Models\Report;
 use App\Models\Role;
 use App\Models\User;
 use DB;
-use Illuminate\Bus\Batch;
 use Illuminate\Console\Command;
 use Illuminate\Database\Connection;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Database\QueryException;
-use Illuminate\Support\Facades\Bus;
 use Psr\Log\LoggerInterface;
-use Throwable;
 
 class OldToNewMigration extends Command
 {
@@ -52,7 +48,7 @@ class OldToNewMigration extends Command
     public function handle(): void
     {
         // Make sure that there is a clean database where all the data is being migrated to.
-        $this->call('migrate:refresh');
+        $this->call('migrate:fresh');
 
         // Seed the database with roles and powers.
         $this->call('db:seed');
@@ -89,7 +85,7 @@ class OldToNewMigration extends Command
                         'type' => $corePower->type,
                         'card_number' => $corePower->kaart,
                         'power' => $corePower->kracht,
-                        'description' => $corePower->tekst
+                        'description' => $corePower->tekst,
                     ]);
             } catch (QueryException $exception) {
                 $this->logger->error($exception->getMessage());
@@ -119,7 +115,7 @@ class OldToNewMigration extends Command
                         'id' => $supportPower->id,
                         'type' => $supportPower->type,
                         'power' => $supportPower->kracht,
-                        'description' => $supportPower->tekst
+                        'description' => $supportPower->tekst,
                     ]);
             } catch (QueryException $exception) {
                 $this->logger->error($exception->getMessage());
@@ -162,7 +158,7 @@ class OldToNewMigration extends Command
                         'first_support_power_id' => $firstSupportPowerId,
                         'second_support_power_id' => $secondSupportPowerId,
                         'first_support_power_id_2' => $firstSupportPowerId2,
-                        'second_support_power_id_2' => $secondSupportPowerId2
+                        'second_support_power_id_2' => $secondSupportPowerId2,
                     ]);
             } catch (QueryException $exception) {
                 $this->logger->error($exception->getMessage());
@@ -199,22 +195,23 @@ class OldToNewMigration extends Command
                         'email_verified_at' => $user->created_at,
                         'remember_token' => $user->remember_token,
                         'created_at' => $user->created_at,
-                        'updated_at' => $user->updated_at
+                        'updated_at' => $user->updated_at,
                     ]);
             } catch (QueryException $exception) {
                 $this->logger->error($exception->getMessage());
                 dd($exception->getMessage());
             }
         }
-        $this->logger->info('Start core_powers_support_powers migrations...');
+        $this->logger->info('Finish users migrations...');
 
-        User::query()->create([
-            'role_id' => Role::ROLE_ADMIN,
-            'name' => 'Ghost',
-            'email' => 'ghost@tweekracht.nl',
-            'password' => \Hash::make('$Tweekracht123'),
-            'email_verified_at' => now()
-        ]);
+        User::query()
+            ->create([
+                'role_id' => Role::ROLE_ADMIN,
+                'name' => 'Ghost',
+                'email' => 'ghost@tweekracht.nl',
+                'password' => \Hash::make(config('services.admin-password')),
+                'email_verified_at' => now(),
+            ]);
     }
 
     /**
@@ -229,7 +226,9 @@ class OldToNewMigration extends Command
             ->from('bedrijven')
             ->get();
 
-        $ghostUser = User::query()->where('email', 'ghost@tweekracht.nl')->first();
+        $ghostUser = User::query()
+            ->where('email', 'ghost@tweekracht.nl')
+            ->first();
 
         $this->logger->info('Start companies migrations...');
         foreach ($companies as $company) {
@@ -245,7 +244,7 @@ class OldToNewMigration extends Command
                         'place' => $company->plaats,
                         'phone_number' => $company->telefoon,
                         'created_at' => $company->created_at,
-                        'updated_at' => $company->updated_at
+                        'updated_at' => $company->updated_at,
                     ]);
             } catch (QueryException $exception) {
                 $this->logger->error($exception->getMessage());
@@ -274,7 +273,9 @@ class OldToNewMigration extends Command
                 $coach = User::query()
                     ->find($client->user_id);
 
-                $ghostUser = User::query()->where('email', 'ghost@tweekracht.nl')->first();
+                $ghostUser = User::query()
+                    ->where('email', 'ghost@tweekracht.nl')
+                    ->first();
 
                 $this->newConnection->table('clients')
                     ->insert([
@@ -296,7 +297,7 @@ class OldToNewMigration extends Command
                     $this->newConnection->table('client_core_powers')
                         ->insert([
                             'client_id' => $client->id,
-                            'core_power_id' => $client->kernkracht1
+                            'core_power_id' => $client->kernkracht1,
                         ]);
                 }
 
@@ -304,7 +305,7 @@ class OldToNewMigration extends Command
                     $this->newConnection->table('client_core_powers')
                         ->insert([
                             'client_id' => $client->id,
-                            'core_power_id' => $client->kernkracht2
+                            'core_power_id' => $client->kernkracht2,
                         ]);
                 }
 
@@ -312,7 +313,7 @@ class OldToNewMigration extends Command
                     $this->newConnection->table('client_support_powers')
                         ->insert([
                             'client_id' => $client->id,
-                            'support_power_id' => $client->hulpkracht1
+                            'support_power_id' => $client->hulpkracht1,
                         ]);
                 }
 
@@ -320,7 +321,7 @@ class OldToNewMigration extends Command
                     $this->newConnection->table('client_support_powers')
                         ->insert([
                             'client_id' => $client->id,
-                            'support_power_id' => $client->hulpkracht2
+                            'support_power_id' => $client->hulpkracht2,
                         ]);
                 }
             } catch (QueryException $exception) {
@@ -339,7 +340,10 @@ class OldToNewMigration extends Command
     private function convertReports(): void
     {
         $reports = $this->oldConnection->query()
-            ->select(['rapports.*', 'clientens.user_id'])
+            ->select([
+                'rapports.*',
+                'clientens.user_id',
+            ])
             ->from('rapports')
             ->join('clientens', 'clientens.id', '=', 'rapports.id')
             ->get();
@@ -350,14 +354,18 @@ class OldToNewMigration extends Command
             try {
                 $this->logger->info('Migrating report: ' . $report->id);
 
-                $oldUser = $this->oldConnection->table('users')->where('id', $report->user_id)->first();
+                $oldUser = $this->oldConnection->table('users')
+                    ->where('id', $report->user_id)
+                    ->first();
 
                 $newReport = new Report();
 
                 $newReport->id = $report->id;
                 $newReport->user_id = $oldUser !== null
                     ? $oldUser->id
-                    : User::query()->where('email', 'ghost@tweekracht.nl')->first()->id;
+                    : User::query()
+                        ->where('email', 'ghost@tweekracht.nl')
+                        ->first()->id;
                 $newReport->client_id = $report->clienten_id;
                 $newReport->created_at = $report->created_at;
                 $newReport->updated_at = $report->updated_at;
