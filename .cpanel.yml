@@ -1,5 +1,0 @@
----
-deployment:
-  tasks:
-    - export DEPLOYPATH=/home/tweekrachttestin/
-    - /bin/cp .env-example .env

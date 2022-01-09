@@ -13,13 +13,15 @@ const mix = require('laravel-mix');
 
 mix.sass('resources/sass/app.scss', 'public/css')
     .sass('resources/sass/auth.scss', 'public/css')
-    .sass('resources/sass/pdf.scss', 'public/css')
-    .sass('resources/sass/idGeneratedStyles.scss', 'public/css');
+    .sass('resources/sass/pdf.scss', 'public/css');
 
 mix.js('resources/js/app.js', 'public/js')
     .extract([
-        'popper.js',
         'jquery',
         'bootstrap',
         'bootstrap-select'
     ]);
+
+if (mix.inProduction()) {
+    mix.version();
+}
