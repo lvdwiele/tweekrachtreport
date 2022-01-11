@@ -5,15 +5,15 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ReportStoreRequest;
-use App\Jobs\Report\SendReportPdfMail;
 use App\Jobs\Report\StoreReportPdfInFileSystem;
 use App\Models\Client;
 use App\Models\Report;
-use App\Models\Report as ReportModel;
 use App\Models\User;
 use App\Tweekracht\Actions\Reports\ReportCreateAction;
 use App\Tweekracht\Actions\Reports\ReportDeleteAction;
 use App\Tweekracht\Dto\ReportDto;
+use App\Tweekracht\Dto\ReportPdfDto;
+use App\Tweekracht\Helpers\PowerColorHelper;
 use App\Tweekracht\Helpers\PowerHelper;
 use App\Tweekracht\Html\Alert;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
@@ -24,6 +24,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Redirector;
 use Illuminate\View\Factory;
+use Storage;
 
 final class ReportController extends Controller
 {
@@ -39,9 +40,13 @@ final class ReportController extends Controller
         /** @var User $user */
         $user = $request->user();
 
-        $reports = ReportModel::findByUserType($user)
+        $reports = Report::findByUserType($user)
             ->join('clients', 'clients.id', '=', 'reports.client_id')
-            ->with(['client', 'client.corePowers', 'client.supportPowers'])
+            ->with([
+                'client',
+                'client.corePowers',
+                'client.supportPowers',
+            ])
             ->select('reports.*');
 
         if (!empty($filter)) {
@@ -144,18 +149,19 @@ final class ReportController extends Controller
         }
 
         return $this->redirector->route('reports')
-            ->with(Alert::DANGER, __('report.delete.messages.success'));
+            ->with(Alert::SUCCESS, __('report.delete.messages.success'));
     }
 
     public function download(Report $report, FilesystemManager $fileSystem): Response
     {
         try {
             return new Response(
-                $fileSystem->disk('reports')->get($report->client->report_file_name),
+                $fileSystem->disk('reports')
+                    ->get($report->client->report_file_name),
                 200,
                 [
                     'Content-Type' => 'application/pdf',
-                    'Content-Disposition' => sprintf('attachment; filename="%s.pdf"', $report->client->full_name)
+                    'Content-Disposition' => sprintf('attachment; filename="%s.pdf"', $report->client->full_name),
                 ]
             );
         } catch (FileNotFoundException $exception) {
@@ -165,8 +171,14 @@ final class ReportController extends Controller
 
     public function createFile(Report $report): RedirectResponse
     {
+        if (Storage::disk('reports')
+            ->exists($report->client->report_file_name)) {
+            Storage::disk('reports')
+                ->delete($report->client->report_file_name);
+        }
+
         $report->update([
-            'file_status' => Report::$FILE_STATUS_IN_THE_MAKE
+            'file_status' => Report::$FILE_STATUS_IN_THE_MAKE,
         ]);
 
         StoreReportPdfInFileSystem::dispatch($report);
