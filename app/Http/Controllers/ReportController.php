@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ReportStoreRequest;
-use App\Jobs\Report\StoreReportPdfInFileSystem;
 use App\Models\Client;
 use App\Models\Report;
 use App\Models\User;
@@ -24,7 +23,6 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Redirector;
 use Illuminate\View\Factory;
-use Storage;
 
 final class ReportController extends Controller
 {
@@ -169,20 +167,25 @@ final class ReportController extends Controller
         }
     }
 
-    public function createFile(Report $report): RedirectResponse
+    public function previewPdf(Report $report)
     {
-        if (Storage::disk('reports')
-            ->exists($report->client->report_file_name)) {
-            Storage::disk('reports')
-                ->delete($report->client->report_file_name);
-        }
+        $client = $report->client;
 
-        $report->update([
-            'file_status' => Report::$FILE_STATUS_IN_THE_MAKE,
-        ]);
+        $reportPdf = new ReportPdfDto(
+            resolve(PowerHelper::class),
+            resolve(PowerColorHelper::class),
+            $client,
+            $client->corePowers->first(),
+            $client->corePowers->last(),
+            $client->supportPowers->first(),
+            $client->supportPowers->last()
+        );
 
-        StoreReportPdfInFileSystem::dispatch($report);
-
-        return $this->redirector->back();
+        return $this->view->make(
+            'report.pdf', [
+                'client' => $client,
+                'reportPdf' => $reportPdf,
+            ]
+        );
     }
 }

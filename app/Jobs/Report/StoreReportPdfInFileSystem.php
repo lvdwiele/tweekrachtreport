@@ -37,12 +37,16 @@ class StoreReportPdfInFileSystem implements ShouldQueue
             $client->supportPowers->last()
         );
 
-        $pdf = $domPdf->loadView('report.pdf', ['client' => $client, 'reportPdf' => $reportPdf]);
+        $pdf = $domPdf->loadView('report.pdf', [
+            'client' => $client,
+            'reportPdf' => $reportPdf,
+        ]);
 
-        $fileSystem->disk('reports')->put($client->report_file_name, $pdf->output());
+        $fileSystem->disk('reports')
+            ->put($client->report_file_name, $pdf->output());
 
         $this->report->update([
-            'file_status' => Report::$FILE_STATUS_AVAILABLE
+            'file_status' => Report::$FILE_STATUS_AVAILABLE,
         ]);
     }
 }

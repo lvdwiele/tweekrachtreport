@@ -101,8 +101,8 @@ Route::group(['middleware' => ['verified', 'auth']], function () {
             ->name('reports.destroy');
         Route::get('/reports/{report}/download', [ReportController::class, 'download'])
             ->name('reports.download');
-        Route::put('/reports/{report}/create-file', [ReportController::class, 'createFile'])
-            ->name('reports.create_file');
+        Route::get('/reports/{report}/preview-pdf', [ReportController::class, 'previewPdf'])
+            ->name('reports.preview_pdf');
     });
 
     /*
@@ -131,3 +131,4 @@ Route::group(['middleware' => ['verified', 'auth']], function () {
      */
     Route::get('/logout', [LoginController::class, 'logout']);
 });
+

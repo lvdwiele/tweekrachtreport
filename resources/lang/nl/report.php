@@ -39,6 +39,7 @@ return [
         'delete_button' => 'Rapport verwijderen',
         'make_file_button' => 'Rapport bestand aanmaken',
         'export_button' => 'Exporteer',
+        'recreate_button' => 'Opnieuw aanmaken',
         'first_line' => 'Dit rapport is opgemaakt op <span class="font-weight-bold">:date</span>',
         'second_line' => 'In opdracht van <span class="font-weight-bold">:user</span>',
         'third_line' => 'Zijn twee kernkrachten zijn <span class="font-weight-bold">:first_core_power</span> en <span class="font-weight-bold">:second_core_power</span>',
@@ -58,7 +59,7 @@ return [
     ],
     'status' => [
         'not_found' => 'Niet gevonden',
-        'in_the_make' => 'Op dit moment wordt het bestand gemaakt. Dit kan enkele minuten duren, ververs de pagina of probeer het op een later moment nog eens',
+        'in_the_make' => 'Op dit moment wordt het bestand gemaakt. Dit kan enkele minuten duren.',
         'available' => 'Gevonden',
     ],
 ];
