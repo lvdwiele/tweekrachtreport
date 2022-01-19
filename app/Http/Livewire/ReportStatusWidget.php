@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Jobs\Report\StoreReportPdfInFileSystem;
 use App\Models\Report;
 use App\Tweekracht\Actions\Reports\ReportDeleteAction;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 
 class ReportStatusWidget extends Component
@@ -20,9 +21,11 @@ class ReportStatusWidget extends Component
 
     public function createFile()
     {
-        if (\Storage::disk('reports')
-            ->exists($this->report->client->report_file_name)) {
-            \Storage::disk('reports')
+        if (
+            Storage::disk('reports')
+                ->exists($this->report->client->report_file_name)
+        ) {
+            Storage::disk('reports')
                 ->delete($this->report->client->report_file_name);
         }
 

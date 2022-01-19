@@ -19,7 +19,7 @@
                     {!! __('report.show.fourth_line', ['first_support_power' => $firstSupportPower->power, 'second_support_power' => $secondSupportPower->power]) !!}
                 </p>
             </div>
-            <div class="col-md-4 ml-auto">
+            <div class="col-md-6 col-lg-4 ml-auto">
                 <livewire:report-status-widget :report="$report"/>
             </div>
         </div>
