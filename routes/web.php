@@ -101,8 +101,6 @@ Route::group(['middleware' => ['verified', 'auth']], function () {
             ->name('reports.destroy');
         Route::get('/reports/{report}/download', [ReportController::class, 'download'])
             ->name('reports.download');
-        Route::get('/reports/{report}/preview-pdf', [ReportController::class, 'previewPdf'])
-            ->name('reports.preview_pdf');
     });
 
     /*

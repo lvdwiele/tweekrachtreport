@@ -51,6 +51,9 @@ return [
             'success' => 'Je hebt succesvol een rapport verwijderd.'
         ]
     ],
+    'download' => [
+        'filename' => 'Kernkrachten werkboekje van :name'
+    ],
     'mail' => [
         'sent' => [
             'success' => 'Mail succesvol verstuurd!',
@@ -59,7 +62,7 @@ return [
     ],
     'status' => [
         'not_found' => 'Niet gevonden',
-        'in_the_make' => 'Op dit moment wordt het bestand gemaakt. Dit kan enkele minuten duren.',
+        'in_the_make' => 'Op dit moment wordt het bestand gemaakt. Dit kan enkele seconden duren.',
         'available' => 'Gevonden',
         'error' => 'Er is een fout opgetreden. Probeer het nogmaals.',
     ],

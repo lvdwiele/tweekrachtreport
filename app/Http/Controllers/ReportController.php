@@ -11,8 +11,6 @@ use App\Models\User;
 use App\Tweekracht\Actions\Reports\ReportCreateAction;
 use App\Tweekracht\Actions\Reports\ReportDeleteAction;
 use App\Tweekracht\Dto\ReportDto;
-use App\Tweekracht\Dto\ReportPdfDto;
-use App\Tweekracht\Helpers\PowerColorHelper;
 use App\Tweekracht\Helpers\PowerHelper;
 use App\Tweekracht\Html\Alert;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
@@ -159,33 +157,14 @@ final class ReportController extends Controller
                 200,
                 [
                     'Content-Type' => 'application/pdf',
-                    'Content-Disposition' => sprintf('attachment; filename="%s.pdf"', $report->client->full_name),
+                    'Content-Disposition' => sprintf(
+                        'attachment; filename="%s.pdf"',
+                        __('report.download.filename', ['name' => $report->client->full_name])
+                    ),
                 ]
             );
         } catch (FileNotFoundException $exception) {
             return new Response('', 404);
         }
-    }
-
-    public function previewPdf(Report $report)
-    {
-        $client = $report->client;
-
-        $reportPdf = new ReportPdfDto(
-            resolve(PowerHelper::class),
-            resolve(PowerColorHelper::class),
-            $client,
-            $client->corePowers->first(),
-            $client->corePowers->last(),
-            $client->supportPowers->first(),
-            $client->supportPowers->last()
-        );
-
-        return $this->view->make(
-            'report.pdf', [
-                'client' => $client,
-                'reportPdf' => $reportPdf,
-            ]
-        );
     }
 }
