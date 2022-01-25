@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
 @page {
     size: A4;
@@ -6,537 +7,472 @@
     padding: 0;
 }
 
-body {
-    margin: 0px;
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
 }
 
-.content {
-    margin-left: 65px;
-    margin-right: 75px;
+* {
+    box-sizing: border-box;
+}
+
+img {
+    max-width: 100%;
 }
 
 .page-break {
     page-break-after: always;
 }
 
-.header {
-    width: 101%;
-    height: 150px;
-    top: -100px;
-    left: -50px;
-}
-
-.row {
-    display: inline-block;
-}
-
-.float {
-    margin-left: 20%;
-    position: relative;
-    z-index: 999;
-    background-color: #55c3e9;
-}
-
-.kleurvlak {
-    height: 890px;
-    width: 101%;
-    background-color: #55c3e9;
-    bottom: 0px;
-    position: absolute;
-    padding-top: 50px;
-}
-
-.kleurvlak2 {
-    height: 890px;
-    width: 101%;
-    background-color: #e6007d;
-    bottom: 0px;
-    position: absolute;
-    padding-top: 50px;
+body {
+    margin: 0;
+    padding: 0;
 }
 
 .logo {
-    padding-top: 60px;
-    margin-left: 215px;
-    height: 50px;
-    width: 370px;
-}
-
-.titel {
-    margin-bottom: 25px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
     text-align: center;
-    margin-bottom: 0;
+    padding: 60px 0 73px;
+
+    img {
+        width: 370px;
+    }
 }
 
-.kaarten {
-    height: 280px;
-    width: 700px;
-    margin-left: 50px;
+.content {
+    margin-left: 65px;
+    margin-right: 75px;
+
+    .h1, .h2, .h3, .h4, .h5, .h6 {
+        padding-bottom: 18px;
+
+        &.no-pb {
+            padding-bottom: 0;
+        }
+    }
+
+    p {
+        padding-bottom: 24px;
+
+        &.no-pb {
+            padding-bottom: 0;
+        }
+    }
 }
 
-.witregel {
-    height: 50px;
-    width: 100%;
-}
-
-.container {
-    position: relative;
-    width: 80%;
-    margin-left: 150px;
-    margin-top: 200px;
-    text-align: center;
-}
-
-.container2 {
-    position: relative;
-    width: 80%;
-    text-align: center;
-    padding-left: 32px;
-    margin-top: 100px;
-}
-
-.container3 {
-    position: relative;
-    width: 80%;
-    margin-left: 150px;
-    margin-top: 200px;
-}
-
-.diamantrel {
-    height: 85mm;
-    width: 100mm;
-    display: block;
-    margin: auto auto auto 60px;
-    position: relative;
-}
-
-.diamant {
-    height: 85mm;
-    width: 100mm;
-    display: block;
-    margin: auto auto auto 60px;
-}
-
-.denkvrouw {
-    float: right;
-    margin-top: 12.5px;
-}
-
-.roltrappen {
-    width: 100%;
-    margin-top: 80.5px;
-    z-index: -1;
-}
-
-.jarigmeisje {
-    width: 100%;
-    margin-top: 136.5px;
-}
-
-.fullimage {
-    width: 100%;
+.full-image-bottom {
     position: absolute;
-    top: 115px;
-}
-
-.links {
-    position: absolute;
-    left: -400;
-    top: 65px;
-}
-
-.rechts {
-    position: absolute;
-    right: -200;
-    top: 65px;
-}
-
-.boven {
-    position: absolute;
-    top: -45;
-    left: -100;
-    font-family: "Helvetica Neue", sans-serif;
-    font-size: 25px;
-    text-transform: uppercase;
-}
-
-.onder {
-    position: absolute;
-    top: 165px;
-    left: -100;
-    font-family: "Helvetica Neue", sans-serif;
-    font-size: 25px;
-    text-transform: uppercase;
-}
-
-.uptekst {
-    top: 400px;
-    position: absolute;
-}
-
-.vak {
-    display: inline-block;
-    width: 52mm;
-    height: 48mm;
-    background-color: #55c3e9;
-    margin: 5px;
-    border-radius: 25px;
-    padding: 20px 14px 14px;
-    top: 0;
-}
-
-.eerstevak {
-    display: inline-block;
-    width: 52mm;
-    height: 48mm;
-    background-color: #55c3e9;
-    margin: 5px;
-    border-radius: 25px;
-    padding: 20px 14px 14px;
-    top: 0;
-}
-
-.vak2 {
-    z-index: 999;
-    margin-top: 60px;
-    margin-left: 60px;
-    width: 210px;
-    height: 220px;
-    padding: 20px;
-    background-color: #e5007d;
-    border-radius: 25px;
-}
-
-.floatingvak {
-    z-index: 999;
-    margin-top: 60px;
-    margin-left: 60px;
-    width: 210px;
-    height: 220px;
-    padding: 20px;
-    background-color: #55c3e9;
-    border-radius: 25px;
-}
-
-.krachtenTabel {
+    bottom: 0;
     width: 100%;
 }
 
-.krachtenTabelregel {
-    width: 100%;
-    height: 25px;
-    margin-top: 5px;
-    border: 1px solid black;
-}
-
-.krachtenTabelKracht {
-    width: 20%;
-    height: 25px;
-    float: left;
-    padding-top: 2px;
-    padding-left: 10px;
-    border-right: 1px solid black;
-}
-
-.krachtenTabelInvul {
-    width: 75%;
-    float: right;
-}
-
-.tablecell0 {
-    background: rgba(241, 3, 3, 0.4);
-    border-right: 1px solid white;
-}
-
-.tablecell1 {
-    background: rgba(11, 153, 54, 0.5);;
-    border-right: 1px solid white;
-}
-
-.tablecell2 {
-    background: rgba(11, 153, 54, 0.6);
-    border-right: 1px solid white;
-}
-
-.tablecell3 {
-    background: rgba(11, 153, 54, 0.7);
-    border-right: 1px solid white;
-}
-
-.tablecell4 {
-    background: rgba(11, 153, 54, 0.8);
-    border-right: 1px solid white;
-}
-
-.tablecell5 {
-    background: rgba(11, 153, 54, 0.9);
-    border-right: 1px solid white;
-}
-
-.tablecell6 {
-    background: rgba(11, 153, 54);
-}
-
-
-.enkelInvul {
-    border: 1px solid #dfdedd !important;
-    height: 25px;
-    width: 275px;
-    margin-right: 5px;
-    margin-top: 5px;
-    display: inline-block;
-    background-color: #dfdedd !important;
-}
-
-.grootInvul {
-    height: 150px;
-    width: 100%;
-    background-color: #dfdedd !important;
-}
-
-.groterInvul {
-    margin-top: 10px;
-    height: 215px;
-    width: 100%;
-    background-color: #dfdedd !important;
-}
-
-.invulBreed {
-    height: 25px;
-    width: 100%;
-    border: 1px solid #dfdedd !important;
-    background-color: #dfdedd !important;
-}
-
-.InvulContainer {
-    display: inline;
-    width: 600px;
-    position: relative;
-}
-
-.selecties {
-    width: 400px;
-    height: 30px;
-}
-
-.selectie {
-    margin-right: 10px;
-    display: inline-block;
-}
-
-.copywrite {
+.footer {
     width: 100%;
     padding: 10px;
     position: absolute;
     bottom: 0;
+    font-size: 13px;
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
 }
 
-.helltekst {
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+.table {
+    margin-bottom: 20px;
+
+    // Each table is basically just one row
+    table {
+        font-family: "Roboto", sans-serif;
+        border: 1px solid black;
+        border-collapse: collapse;
+        width: 100%;
+        text-align: center;
+
+        // We want a little bit of space in between the table "row"
+        margin-bottom: 2px;
+
+        tr {
+            border: 1px solid black;
+        }
+
+        td {
+            border-right: 1px solid white;
+
+            &:first-child {
+                padding-left: 10px;
+                text-align: left;
+                width: 140px;
+            }
+
+            // nth-child doesn't work properly in PDF.
+            &.td-0 {
+                background: rgba(241, 3, 3, 0.4);
+            }
+
+            &.td-1 {
+                background: rgba(11, 153, 54, 0.5);
+            }
+
+            &.td-2 {
+                background: rgba(11, 153, 54, 0.6);
+            }
+
+            &.td-3 {
+                background: rgba(11, 153, 54, 0.7);
+            }
+
+            &.td-4 {
+                background: rgba(11, 153, 54, 0.8);
+            }
+
+            &.td-5 {
+                background: rgba(11, 153, 54, 0.9);
+            }
+
+            // last-child doesnt work in PDF.
+            &.td-6 {
+                background: rgba(11, 153, 54);
+
+                // cannot set just border-right-color, that doesnt work in pdf
+                border-right: 1px solid black;
+            }
+        }
+    }
 }
 
+.select {
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 34px;
+    list-style: none;
+    position: relative;
 
-.wit {
-    color: white;
+    li::before {
+        content: " ";
+        background-color: #55C2E9;
+        width: 25px;
+        height: 25px;
+        margin-top: 10px;
+        border-radius: 100%;
+        position: absolute;
+        left: -32px;
+        top: 1px;
+    }
+
+    li {
+        position: relative;
+        margin-left: 32px;
+    }
+
+    &.select-horizontal li {
+        display: inline-block;
+        margin-right: 20px;
+    }
 }
 
-.roze {
-    color: #e5007d;
+/**
+ * Backgrounds
+ */
+
+.bg-blue, .bg-pink {
+    width: 100%;
+    height: 806px;
 }
 
-.grijs {
+.bg-blue {
+    background-color: #55C2E9;
+}
+
+.bg-pink {
+    background-color: #E6007E;
+}
+
+/**
+ * Font classes
+ */
+.text-center {
+    text-align: center;
+}
+
+.text-justify {
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+.text-bold, b {
+    font-weight: bold;
+}
+
+.text-white {
+    color: #ffffff;
+}
+
+.text-black {
+    color: #111111;
+}
+
+.text-gray {
     color: #8A8A8A;
 }
 
-.copy {
-    font-size: 10px;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+.text-blue {
+    color: #55C2E9;
 }
 
-.justify {
-    text-align: justify;
+.text-pink {
+    color: #E6007E;
 }
 
-.centertekst {
-    text-align: center;
+.text-red {
+    color: red;
 }
 
-.Font10 {
-    font-family: "Helvetica Neue", sans-serif;
-    font-size: 9px;
-    padding: 5px;
-    line-height: 1.4;
-    word-break: keep-all;
+.text-green {
+    color: green;
 }
 
-.Font12 {
-    font-family: "Montserrat", serif;
+.h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: "Montserrat", sans-serif;
     font-weight: 900;
     text-transform: uppercase;
-    font-size: 12px;
 }
 
-.Font12 b {
-    font-family: "Montserrat", serif;
-    font-weight: 900;
-    text-transform: uppercase;
-    font-size: 12px;
+.h1 {
+    line-height: 90px;
+    font-size: 90px;
 }
 
-.Font14 {
-    font-family: "Montserrat", serif;
-    font-weight: 900;
-    text-transform: uppercase;
+.h2 {
+    line-height: 56px;
+    font-size: 56px;
+}
+
+.h3 {
+    font-size: 32px;
+}
+
+.h4 {
+    font-size: 24px;
+}
+
+.h5 {
+    font-size: 22px;
+}
+
+.h6 {
+    font-size: 20px;
+}
+
+p {
     font-size: 14px;
-    line-height: 1;
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
 }
 
-.Font15 {
-    font-family: "Montserrat", serif;
-    font-weight: 900;
-    text-transform: uppercase;
-    font-size: 15px;
-    margin-top: 500px;
+/**
+ *  Write lines
+ */
+.write-lines {
+    margin-bottom: 24px;
+
+    > * {
+        margin-bottom: 2px;
+        height: 25px;
+        background-color: #dfdedd;
+    }
+
+    .line-small {
+        width: 275px;
+        margin-right: 5px;
+        margin-top: 5px;
+        display: inline-block;
+    }
+
+    .line-big {
+        height: 150px;
+    }
 }
 
-.Font18 {
-    font-family: "Montserrat", serif;
-    font-weight: 900;
-    text-transform: uppercase;
-    font-size: 17.2px;
-    line-height: 1;
+
+/**
+ * Page css
+ */
+.page-0 {
+    .bg-blue {
+        padding: 130px 0 0;
+        bottom: 0;
+        position: absolute;
+
+        img {
+            margin: 0;
+            padding: 60px 0 0;
+            width: 660px;
+        }
+    }
+
+    .h5 {
+        padding-top: 10px;
+    }
 }
 
-.Font20 {
-    font-family: "Montserrat", serif;
-    font-weight: 900;
-    text-transform: uppercase;
-    font-size: 20px;
+.page-1 {
+    padding: 130px 0 0;
+
+    .diamond-container {
+        position: relative;
+        margin: 300px 0 50px;
+
+        .diamond {
+            display: block;
+            margin: auto;
+        }
+
+        .circle {
+            position: absolute;
+            width: 34px;
+            height: 34px;
+            border-radius: 30px;
+
+            &.circle-left {
+                top: -8px;
+                left: 211px;
+            }
+
+            &.circle-right {
+                top: -8px;
+                left: 533px;
+            }
+
+            &.circle-top {
+                top: -63px;
+                left: 371px;
+            }
+
+            &.circle-bottom {
+                top: 214px;
+                left: 373px;
+            }
+        }
+
+        .power-text-top,
+        .power-text-bottom {
+            font-family: sans-serif;
+            font-weight: normal;
+        }
+
+        .power-text-top {
+            margin-top: -450px;
+        }
+
+        .power-text-bottom {
+            margin-top: -175px;
+        }
+
+        .power-text-left,
+        .power-text-right {
+            position: absolute;
+            top: 30px;
+        }
+
+        .power-text-left {
+            left: 0;
+            right: 370px;
+            text-align: center;
+        }
+
+        .power-text-right {
+            left: 370px;
+            right: 0;
+            text-align: center;
+        }
+    }
 }
 
-.Font24 {
-    font-family: "Montserrat", serif;
-    font-weight: 900;
-    text-transform: uppercase;
-    font-size: 24px;
+.page-3 {
+    .bg-pink {
+        padding: 100px 0 30px;
+        bottom: 0;
+        position: absolute;
+    }
 }
 
-.Font26 {
-    font-family: "Montserrat", serif;
-    font-weight: 900;
-    text-transform: uppercase;
-    font-size: 26px;
+.page-4 {
+    .h2 {
+        padding: 50px 0 100px;
+        font-size: 46px;
+    }
+
+    .content {
+        margin: 0 40px;
+    }
+
+    .card {
+        display: inline-block;
+        width: 52mm;
+        height: 48mm;
+        background-color: #55c3e9;
+        margin: 5px;
+        border-radius: 25px;
+        padding: 20px 14px 14px;
+
+        p {
+            font-size: 12px;
+            line-height: 18px;
+        }
+    }
 }
 
-.Font27 {
-    font-family: "Montserrat", serif;
-    text-transform: uppercase;
-    font-size: 27px;
+.page-5 {
+    .logo {
+        padding-bottom: 20px;
+    }
+
+    span {
+        font-weight: 700;
+
+        // fix for prevent weird indents in the text
+        display: inline-block;
+        vertical-align: text-bottom;
+    }
 }
 
-.Font29 {
-    font-family: "Montserrat", serif;
-    font-weight: 900;
-    text-transform: uppercase;
-    font-size: 29px;
+.page-7 {
+    // I know, strange class name. The previous version of this app had it and i think it is funny to keep using it
+    .denkvrouw {
+        position: absolute;
+        width: 350px;
+        bottom: 0;
+        right: 100px;
+    }
 }
 
-.Font37 {
-    font-family: "Montserrat", serif;
-    font-weight: 900;
-    text-transform: uppercase;
-    font-size: 37px;
-    text-align: center;
-    line-height: 1;
+.page-18 {
+    .logo {
+        padding-bottom: 20px;
+    }
+
+    p {
+        line-height: 20px;
+    }
 }
 
-.Font50 {
-    font-family: "Montserrat", serif;
-    text-transform: uppercase;
-    font-size: 50px;
-    font-weight: 900;
+.page-week-assignment {
+    .logo {
+        padding-bottom: 20px;
+    }
 }
 
-.Font70 {
-    font-family: "Montserrat", serif;
-    text-transform: uppercase;
-    font-size: 70px;
-    font-weight: 900;
-    text-align: center;
-    line-height: 1;
-}
-
-h1 {
-    font-family: "Montserrat", serif;
-    text-transform: uppercase;
-    font-size: 20px;
-    font-weight: 900;
-}
-
-h2 {
-    color: white;
-    font-size: 70px;
-    margin: 0;
-    padding: 0;
-}
-
-h3, h4, h5 {
-    color: white;
-    font-weight: 900;
-    margin: 0;
-    padding: 0;
-    font-family: "Montserrat", sans-serif;
-    justify-content: center;
-    text-align: center;
-}
-
-h6 {
-    color: black;
-    font-size: 24px;
-    font-weight: 900;
-    margin: 0;
-    padding: 0;
-    font-family: "Montserrat", sans-serif;
-}
-
-ul {
-    list-style-image: url('/images/logowhite.png');
-}
-
-.tabeltekst {
-    font-size: 10px;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    margin-right: 10px;
-    display: inline;
-}
-
-.groottekst {
-    font-family: "Montserrat", serif;
-    text-transform: uppercase;
-    font-size: 40px;
-    font-weight: 900;
-    text-align: center;
-}
-
-.normaaltekst {
-    font-size: 10px;
-    text-align: justify;
-    text-justify: inter-word;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-}
-
-.normaaltekst2 {
-    font-size: 10px;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-}
-
-.regelafstandtekst {
-    font-size: 10px;
-    line-height: 1.65;
-    text-align: justify;
-    text-justify: inter-word;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+.page-25, .page-29 {
+    .card {
+        z-index: 99;
+        margin-top: 60px;
+        margin-left: 60px;
+        width: 210px;
+        height: 220px;
+        padding: 20px;
+        border-radius: 25px;
+    }
 }

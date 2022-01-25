@@ -49,4 +49,11 @@ class StoreReportPdfInFileSystem implements ShouldQueue
             'file_status' => Report::$FILE_STATUS_AVAILABLE,
         ]);
     }
+
+    public function failed()
+    {
+        $this->report->update([
+            'file_status' => Report::$FILE_STATUS_ERROR,
+        ]);
+    }
 }

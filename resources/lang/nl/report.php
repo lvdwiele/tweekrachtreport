@@ -61,5 +61,6 @@ return [
         'not_found' => 'Niet gevonden',
         'in_the_make' => 'Op dit moment wordt het bestand gemaakt. Dit kan enkele minuten duren.',
         'available' => 'Gevonden',
+        'error' => 'Er is een fout opgetreden. Probeer het nogmaals.',
     ],
 ];

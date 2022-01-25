@@ -1,1 +1,3 @@
-<div class="header"><img class="logo" src="{{ storage_path('/images/rapport/regilogo.jpg') }}"/></div>
+<div class="logo">
+    <img src="{{ asset('/images/rapport/regilogo.jpg') }}" />
+</div>

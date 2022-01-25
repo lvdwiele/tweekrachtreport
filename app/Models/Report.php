@@ -4,12 +4,10 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Filesystem\FilesystemManager;
-use function PHPUnit\Framework\matches;
 
 /**
  * Class Report
@@ -30,10 +28,11 @@ final class Report extends Model
     public static int $FILE_STATUS_NOT_FOUND = 0;
     public static int $FILE_STATUS_IN_THE_MAKE = 1;
     public static int $FILE_STATUS_AVAILABLE = 2;
+    public static int $FILE_STATUS_ERROR = 3;
 
     protected $fillable = [
         'user_id',
-        'file_status'
+        'file_status',
     ];
 
     /**
@@ -72,22 +71,24 @@ final class Report extends Model
         /** @var FilesystemManager $filesystem */
         $filesystem = resolve(FilesystemManager::class);
 
-        return $filesystem->disk('reports')->has($this->client->report_file_name);
+        return $filesystem->disk('reports')
+            ->has($this->client->report_file_name);
     }
 
     public function getFileStatusTextAttribute(): string
     {
-        return match($this->file_status) {
+        return match ($this->file_status) {
             self::$FILE_STATUS_NOT_FOUND => __('report.status.not_found'),
             self::$FILE_STATUS_IN_THE_MAKE => __('report.status.in_the_make'),
             self::$FILE_STATUS_AVAILABLE => __('report.status.available'),
+            self::$FILE_STATUS_ERROR => __('report.status.error'),
         };
     }
 
     public function getFileStatusClassAttribute(): string
     {
-        return match($this->file_status) {
-            self::$FILE_STATUS_NOT_FOUND => 'text-danger',
+        return match ($this->file_status) {
+            self::$FILE_STATUS_NOT_FOUND, self::$FILE_STATUS_ERROR => 'text-danger',
             self::$FILE_STATUS_IN_THE_MAKE => 'text-warning',
             self::$FILE_STATUS_AVAILABLE => 'text-success',
         };

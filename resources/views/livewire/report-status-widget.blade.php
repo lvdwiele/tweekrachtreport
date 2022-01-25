@@ -10,10 +10,13 @@
         @if($report->file_status === \App\Models\Report::$FILE_STATUS_IN_THE_MAKE)
             <i wire class="mr-1 fas fa-compact-disc fa-spin"></i>
         @endif
+        @if($report->file_status === \App\Models\Report::$FILE_STATUS_ERROR)
+            <i wire class="mr-1 fas fa-times"></i>
+        @endif
         {{ $report->file_status_text }}
     </span>
     <hr>
-    <div class="row" wire:poll>
+    <div class="row" wire:poll.500ms>
         <div class="col-md-6 mb-3">
             <a class="btn btn-success btn-block"
                href="{{ route('clients.show', [$report->client]) }}">
@@ -33,7 +36,8 @@
                     {{ __('report.show.recreate_button') }}
                 </button>
             </div>
-        @elseif($report->file_status === \App\Models\Report::$FILE_STATUS_NOT_FOUND)
+        @elseif($report->file_status === \App\Models\Report::$FILE_STATUS_NOT_FOUND
+				|| $report->file_status === \App\Models\Report::$FILE_STATUS_ERROR)
             <div class="col-md-6">
                 <button wire:click="createFile()" type="submit"
                         class="btn btn-info text-white btn-block">
