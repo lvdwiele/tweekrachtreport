@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\DashboardController;
@@ -11,7 +12,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserVerifyController;
 
 Auth::routes([
-    'register' => false
+    'register' => false,
+    'verify' => true,
 ]);
 
 /*
