@@ -18,6 +18,8 @@
         "laravel/horizon": "^5.6",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.1",
+        "league/flysystem-cached-adapter": "~1.0",
+        "league/flysystem-sftp": "~1.0",
         "livewire/livewire": "^2.9",
         "opis/closure": "^3.6",
         "sentry/sentry-laravel": "^2.10",
