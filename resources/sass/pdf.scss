@@ -412,9 +412,13 @@ p {
         width: 52mm;
         height: 48mm;
         background-color: #55c3e9;
-        margin: 5px;
         border-radius: 25px;
+        margin: 5px;
         padding: 20px 14px 14px;
+
+        .h6 {
+            padding-bottom: 10px;
+        }
 
         p {
             font-size: 12px;
