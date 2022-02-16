@@ -20,7 +20,7 @@ class DevSeeder extends Seeder
         User::factory()
             ->create([
                 'role_id' => Role::ROLE_ADMIN,
-                'email' => 'dev@code337.rocks',
+                'email' => 'martijn@code337.rocks',
             ]);
     }
 }
