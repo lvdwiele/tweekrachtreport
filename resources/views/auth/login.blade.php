@@ -8,7 +8,7 @@
             <div class="card border-0 bg-trans-75 border-125">
                 <div class="card-header border-0 bg-transparent">
                     <div class="d-flex justify-content-center mt-3">
-                        <img src="{{ asset('/images/regilogo.png') }}" height="50">
+                        <img class="logo" src="{{ asset('/images/regilogo.png') }}" alt="logo">
                     </div>
                 </div>
                 <div class="card-body">
