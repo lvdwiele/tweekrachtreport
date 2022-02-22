@@ -42,8 +42,8 @@ return [
         'recreate_button' => 'Opnieuw aanmaken',
         'first_line' => 'Dit rapport is opgemaakt op <span class="font-weight-bold">:date</span>',
         'second_line' => 'In opdracht van <span class="font-weight-bold">:user</span>',
-        'third_line' => 'Zijn twee kernkrachten zijn <span class="font-weight-bold">:first_core_power</span> en <span class="font-weight-bold">:second_core_power</span>',
-        'fourth_line' => 'En zijn twee hulpkrachten zijn <span class="font-weight-bold">:first_support_power</span> en <span class="font-weight-bold">:second_support_power</span>',
+        'third_line' => 'De twee kernkrachten zijn <span class="font-weight-bold">:first_core_power</span> en <span class="font-weight-bold">:second_core_power</span>',
+        'fourth_line' => 'En de twee hulpkrachten zijn <span class="font-weight-bold">:first_support_power</span> en <span class="font-weight-bold">:second_support_power</span>',
     ],
     'delete' => [
         'messages' => [
