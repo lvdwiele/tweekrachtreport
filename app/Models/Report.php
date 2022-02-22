@@ -43,14 +43,6 @@ final class Report extends Model
         return $this->belongsTo(Client::class);
     }
 
-    /**
-     * @return BelongsTo
-     */
-    public function user(): BelongsTo
-    {
-        return $this->belongsTo(User::class);
-    }
-
     public static function findByUserType(User $user): Builder
     {
         if ($user->role_id === Role::ROLE_ADMIN) {
@@ -58,7 +50,9 @@ final class Report extends Model
         }
 
         return self::query()
-            ->where('reports.user_id', $user->id);
+            ->whereHas('client', function (Builder $query) use ($user) {
+                $query->where('clients.user_id', $user->id);
+            });
     }
 
     public function getFormattedCreatedAtAttribute(): string

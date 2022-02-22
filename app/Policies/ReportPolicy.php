@@ -32,7 +32,7 @@ class ReportPolicy
      */
     public function view(User $user, Report $report): Response
     {
-        return $report->user->id === $user->id || $this->viewAny($user)
+        return $report->client->user_id === $user->id || $this->viewAny($user)
             ? Response::allow()
             : Response::deny(__('client.messages.not_allowed'));
     }
