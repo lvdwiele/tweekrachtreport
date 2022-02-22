@@ -106,7 +106,7 @@
                                 <option value="">- Selecteer eerste kernkracht -</option>
                                 @foreach($corePowers as $corePower)
                                     <option
-                                        {{ old('core_power_1', $client->core_power_1) == $corePower->id ? 'selected' : '' }}
+                                        {{ old('core_power_1', $firstCorePower->id) == $corePower->id ? 'selected' : '' }}
                                         value="{{ $corePower->id }}"
                                     >
                                         {{ $corePower->display_name }}
@@ -123,7 +123,7 @@
                                 <option value="">- Selecteer tweede kernkracht -</option>
                                 @foreach($corePowers as $corePower)
                                     <option
-                                        {{ old('core_power_2', $client->core_power_2) == $corePower->id ? 'selected' : '' }}
+                                        {{ old('core_power_2', $secondCorePower->id) == $corePower->id ? 'selected' : '' }}
                                         value="{{ $corePower->id }}"
                                     >
                                         {{ $corePower->display_name }}

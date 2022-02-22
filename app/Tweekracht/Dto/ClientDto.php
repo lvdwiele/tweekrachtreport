@@ -13,8 +13,8 @@ final class ClientDto
     public Collection $core_powers;
 
     public function __construct(
-        int $core_power_1,
-        int $core_power_2,
+        ?int $core_power_1,
+        ?int $core_power_2,
         public string $first_name,
         public string $last_name,
         public ?string $email = null,
@@ -25,9 +25,10 @@ final class ClientDto
         public ?string $phone_number = null,
     )
     {
+        // When a report is made, the powers are fixed and cannot be changed, therefore they can be empty
         $this->core_powers = Collection::make([
             CorePower::query()->find($core_power_1),
             CorePower::query()->find($core_power_2)
-        ]);
+        ])->filter();
     }
 }

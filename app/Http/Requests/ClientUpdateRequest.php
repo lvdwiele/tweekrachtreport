@@ -34,8 +34,10 @@ final class ClientUpdateRequest extends FormRequest
             $data = $validator->getData();
 
             $data['company_id'] = isset($data['company_id']) ? (int)$data['company_id'] : null;
-            $data['core_power_1'] = (int)$data['core_power_1'];
-            $data['core_power_2'] = (int)$data['core_power_2'];
+
+            // When a report is made, the powers are fixed and cannot be changed
+            $data['core_power_1'] = isset($data['core_power_1']) ? (int)$data['core_power_1'] : null;
+            $data['core_power_2'] = isset($data['core_power_2']) ? (int)$data['core_power_2'] : null;
 
             return $validator->setData($data);
         });
