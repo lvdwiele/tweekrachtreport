@@ -14,6 +14,7 @@ use App\Tweekracht\Actions\Companies\CompanyUpdateAction;
 use App\Tweekracht\Dto\CompanyDto;
 use App\Tweekracht\Html\Alert;
 use Illuminate\Contracts\View\View;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
@@ -24,16 +25,21 @@ final class CompanyController extends Controller
         $filter = $request->query('filter');
 
         $companies = CompanyModel::findByAuthenticatedUser()
-            ->with(['user', 'clients']);
+            ->with([
+                'user',
+                'clients',
+            ]);
 
         if (!empty($filter)) {
             $companies = $companies
-                ->where('companies.name', 'like', '%' . $filter . '%')
-                ->orWhere('companies.address', 'like', '%' . $filter . '%')
-                ->orWhere('companies.zip_code', 'like', '%' . $filter . '%')
-                ->orWhere('companies.place', 'like', '%' . $filter . '%')
-                ->orWhere('companies.email', 'like', '%' . $filter . '%')
-                ->orWhere('companies.phone_number', 'like', '%' . $filter . '%');
+                ->where(function (Builder $query) use ($filter) {
+                    $query->where('companies.name', 'like', '%' . $filter . '%')
+                        ->orWhere('companies.address', 'like', '%' . $filter . '%')
+                        ->orWhere('companies.zip_code', 'like', '%' . $filter . '%')
+                        ->orWhere('companies.place', 'like', '%' . $filter . '%')
+                        ->orWhere('companies.email', 'like', '%' . $filter . '%')
+                        ->orWhere('companies.phone_number', 'like', '%' . $filter . '%');
+                });
         }
 
         $companies = $companies->paginate(15)
@@ -59,7 +65,10 @@ final class CompanyController extends Controller
         $company = ($companyCreateAction)($request->user(), $companyDto);
 
         return $this->redirector->route('companies.show', [$company->id])
-            ->with(Alert::SUCCESS, __('company.create.messages.success', ['Company', $company->name]));
+            ->with(Alert::SUCCESS, __('company.create.messages.success', [
+                'Company',
+                $company->name,
+            ]));
     }
 
     public function update(

@@ -15,6 +15,7 @@ use App\Tweekracht\Actions\Clients\ClientUpdateAction;
 use App\Tweekracht\Dto\ClientDto;
 use App\Tweekracht\Html\Alert;
 use Illuminate\Contracts\View\View;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
@@ -25,15 +26,22 @@ final class ClientController extends Controller
         $filter = $request->query('filter');
 
         $clients = Client::findByUserType($request->user())
-            ->with(['user', 'company', 'corePowers', 'report']);
+            ->with([
+                'user',
+                'company',
+                'corePowers',
+                'report',
+            ]);
 
         if (!empty($filter)) {
             $clients = $clients
-                ->whereHas('corePowers', function ($query) use ($filter) {
-                    $query->where('core_powers.power', 'like', '%' . $filter . '%');
-                })
-                ->orWhere('clients.first_name', 'like', '%' . $filter . '%')
-                ->orWhere('clients.last_name', 'like', '%' . $filter . '%');
+                ->where(function (Builder $query) use ($filter) {
+                    $query->whereHas('corePowers', function ($query) use ($filter) {
+                        $query->where('core_powers.power', 'like', '%' . $filter . '%');
+                    })
+                        ->orWhere('clients.first_name', 'like', '%' . $filter . '%')
+                        ->orWhere('clients.last_name', 'like', '%' . $filter . '%');
+                });
         }
 
         $clients = $clients->paginate(15)
@@ -44,7 +52,8 @@ final class ClientController extends Controller
 
     public function create(Request $request): View
     {
-        $companies = Company::findByUser($request->user())->get();
+        $companies = Company::findByUser($request->user())
+            ->get();
         $corePowers = CorePower::all();
 
         return view('client.create', compact('companies', 'corePowers'));
@@ -62,9 +71,13 @@ final class ClientController extends Controller
 
     public function show(Client $client, Request $request): View
     {
-        $companies = Company::findByUser($request->user())->get();
+        $companies = Company::findByUser($request->user())
+            ->get();
         $corePowers = CorePower::all();
-        [$firstCorePower, $secondCorePower] = $client->corePowers;
+        [
+            $firstCorePower,
+            $secondCorePower,
+        ] = $client->corePowers;
 
         return $this->view->make(
             'client.show',

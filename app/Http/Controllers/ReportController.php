@@ -15,6 +15,7 @@ use App\Tweekracht\Helpers\PowerHelper;
 use App\Tweekracht\Html\Alert;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Contracts\View\View;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Filesystem\FilesystemManager;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -47,13 +48,15 @@ final class ReportController extends Controller
 
         if (!empty($filter)) {
             $reports = $reports
-                ->Where('clients.first_name', 'like', '%' . $filter . '%')
-                ->orWhere('clients.last_name', 'like', '%' . $filter . '%')
-                ->orWhereHas('client.corePowers', function ($query) use ($filter) {
-                    return $query->where('core_powers.power', 'like', '%' . $filter . '%');
-                })
-                ->orWhereHas('client.supportPowers', function ($query) use ($filter) {
-                    return $query->where('support_powers.power', 'like', '%' . $filter . '%');
+                ->where(function (Builder $query) use ($filter) {
+                    $query->where('clients.first_name', 'like', '%' . $filter . '%')
+                        ->orWhere('clients.last_name', 'like', '%' . $filter . '%')
+                        ->orWhereHas('client.corePowers', function ($query) use ($filter) {
+                            return $query->where('core_powers.power', 'like', '%' . $filter . '%');
+                        })
+                        ->orWhereHas('client.supportPowers', function ($query) use ($filter) {
+                            return $query->where('support_powers.power', 'like', '%' . $filter . '%');
+                        });
                 });
         }
 
