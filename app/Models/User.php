@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -80,33 +81,24 @@ final class User extends Authenticatable implements MustVerifyEmail
         'created_at' => 'timestamp',
     ];
 
-    /**
-     * @return BelongsTo
-     */
     public function role(): BelongsTo
     {
         return $this->BelongsTo(Role::class);
     }
 
-    /**
-     * @return HasMany
-     */
     public function clients(): HasMany
     {
         return $this->hasMany(Client::class);
     }
 
-    /**
-     * @return HasMany
-     */
     public function companies(): HasMany
     {
         return $this->hasMany(Company::class);
     }
 
-    public function reports(): HasMany
+    public function reports(): HasManyThrough
     {
-        return $this->hasMany(Report::class);
+        return $this->hasManyThrough(Report::class, Client::class);
     }
 
     /**
@@ -167,8 +159,8 @@ final class User extends Authenticatable implements MustVerifyEmail
             ->year;
 
         return $this->reports()
-            ->whereYear('created_at', '=', $currentYear)
-            ->whereMonth('created_at', '=', $currentMonth)
+            ->whereYear('reports.created_at', '=', $currentYear)
+            ->whereMonth('reports.created_at', '=', $currentMonth)
             ->count();
     }
 
@@ -181,8 +173,8 @@ final class User extends Authenticatable implements MustVerifyEmail
             ->year;
 
         return $this->reports()
-            ->whereYear('created_at', '=', $currentYear)
-            ->whereMonth('created_at', '=', $currentMonth)
+            ->whereYear('reports.created_at', '=', $currentYear)
+            ->whereMonth('reports.created_at', '=', $currentMonth)
             ->count();
     }
 
@@ -195,8 +187,8 @@ final class User extends Authenticatable implements MustVerifyEmail
             ->year;
 
         return $this->reports()
-            ->whereYear('created_at', '=', $currentYear)
-            ->whereMonth('created_at', '=', $currentMonth)
+            ->whereYear('reports.created_at', '=', $currentYear)
+            ->whereMonth('reports.created_at', '=', $currentMonth)
             ->count();
     }
 

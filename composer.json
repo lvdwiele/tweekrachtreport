@@ -23,8 +23,7 @@
         "livewire/livewire": "^2.9",
         "opis/closure": "^3.6",
         "sentry/sentry-laravel": "^2.10",
-        "spatie/laravel-backup": "^7.0",
-        "spatie/laravel-ray": "^1.27"
+        "spatie/laravel-backup": "^7.0"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
@@ -32,7 +31,8 @@
         "laravel/sail": "^1.13.0",
         "mockery/mockery": "^1.4.2",
         "nunomaduro/collision": "^5.0",
-        "phpunit/phpunit": "^9.3.3"
+        "phpunit/phpunit": "^9.3.3",
+        "spatie/laravel-ray": "^1.29"
     },
     "config": {
         "optimize-autoloader": true,
