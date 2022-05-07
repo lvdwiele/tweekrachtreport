@@ -77,8 +77,7 @@ final class User extends Authenticatable implements MustVerifyEmail
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'updated_at' => 'timestamp',
-        'created_at' => 'timestamp',
+        'rate' => 'decimal:2',
     ];
 
     public function role(): BelongsTo

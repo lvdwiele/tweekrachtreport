@@ -45,14 +45,6 @@ final class Company extends Model
         'phone_number',
     ];
 
-    /**
-     * @var array
-     */
-    protected $casts = [
-        'created_at' => 'timestamp',
-        'updated_at' => 'timestamp',
-    ];
-
     public static function findByAuthenticatedUser(): Builder
     {
         /** @var User $user */

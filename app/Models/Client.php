@@ -56,11 +56,6 @@ final class Client extends Model
         'company_id',
     ];
 
-    protected $casts = [
-        'updated_at' => 'timestamp',
-        'created_at' => 'timestamp',
-    ];
-
     /*
      * Relations
      */
