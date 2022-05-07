@@ -61,10 +61,6 @@
     </div>
 @endsection
 
-{{--@section('content')--}}
-{{--    <user-index-page></user-index-page>--}}
-{{--@endsection--}}
-
 @push('scripts')
     <script>
         $(document).ready(function () {

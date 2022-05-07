@@ -24,7 +24,6 @@
 
 <div id="app">
     @include ('partials.sidebar')
-    {{--    <layout-side-bar></layout-side-bar>--}}
 
     <div id="content">
         @include('partials.nav')
