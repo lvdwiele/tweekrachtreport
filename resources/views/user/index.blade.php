@@ -36,12 +36,23 @@
                             <td>{{ $user->email }}</td>
                             <td>{{ $user->rate }} %</td>
                             <td>{{ $user->role->name }}</td>
-                            <td>{{ $user->reports_count_from_this_month }}</td>
-                            <td>{{ $user->reports_count_from_previous_month }}</td>
-                            <td>{{ $user->reports_count_from_two_months_ago }}</td>
+                            <td>{{ $user->reports_this_month_count }}</td>
+                            <td>{{ $user->reports_previous_month_count }}</td>
+                            <td>{{ $user->reports_two_months_ago_count }}</td>
                             <td>{{ $user->reports_count }}</td>
                         </tr>
                     @endforeach
+
+                    <tr class="totals-row">
+                        <td>Totalen:</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>{{ $thisMonth }}</td>
+                        <td>{{ $previousMonth }}</td>
+                        <td>{{ $twoMonthsAgo }}</td>
+                        <td>{{ $total }}</td>
+                    </tr>
                     </tbody>
                 </table>
                 {{ $users->onEachSide(2)->links() }}

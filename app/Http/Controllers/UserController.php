@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\UserStoreRequest;
 use App\Http\Requests\UserUpdateRequest;
+use App\Models\Report;
 use App\Models\Role;
 use App\Models\User;
 use App\Tweekracht\Html\Alert;
@@ -16,10 +17,33 @@ final class UserController extends Controller
 {
     public function index(): View
     {
-        $users = User::with(['reports'])
+        $users = User::withCount([
+            'reports',
+            'reportsThisMonth',
+            'reportsPreviousMonth',
+            'reportsTwoMonthsAgo',
+        ])
             ->paginate(25);
 
-        return $this->view->make('user.index', compact('users'));
+        $thisMonth = Report::whereYear('reports.created_at', '=', now()->year)
+            ->whereMonth('reports.created_at', '=', (string)now()->month)
+            ->count();
+        $previousMonth = Report::whereYear('reports.created_at', '=', now()->subMonth()->year)
+            ->whereMonth('reports.created_at', '=', (string)now()->subMonth()->month)
+            ->count();
+        $twoMonthsAgo = Report::whereYear('reports.created_at', '=', now()->subMonths(2)->year)
+            ->whereMonth('reports.created_at', '=', (string)now()->subMonths(2)->month)
+            ->count();
+        $total = Report::query()
+            ->count();
+
+        return $this->view->make('user.index', [
+            'users' => $users,
+            'thisMonth' => $thisMonth,
+            'previousMonth' => $previousMonth,
+            'twoMonthsAgo' => $twoMonthsAgo,
+            'total' => $total,
+        ]);
     }
 
     public function create(): View
@@ -39,7 +63,8 @@ final class UserController extends Controller
     public function store(UserStoreRequest $request): RedirectResponse
     {
         /** @var User $user */
-        $user = User::query()->create($request->validated());
+        $user = User::query()
+            ->create($request->validated());
 
         return $this->redirector->route('users.show', [$user->id])
             ->with(Alert::SUCCESS, __('user.create.messages.success', ['User' => $user->name]));

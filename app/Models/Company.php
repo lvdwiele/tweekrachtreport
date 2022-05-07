@@ -33,7 +33,7 @@ final class Company extends Model
      * @var string[]
      */
     protected $hidden = [
-        'user_id'
+        'user_id',
     ];
 
     protected $fillable = [
@@ -42,7 +42,7 @@ final class Company extends Model
         'zip_code',
         'place',
         'email',
-        'phone_number'
+        'phone_number',
     ];
 
     /**
@@ -50,7 +50,7 @@ final class Company extends Model
      */
     protected $casts = [
         'created_at' => 'timestamp',
-        'updated_at' => 'timestamp'
+        'updated_at' => 'timestamp',
     ];
 
     public static function findByAuthenticatedUser(): Builder
@@ -62,7 +62,8 @@ final class Company extends Model
             return self::query();
         }
 
-        return $user->companies()->getQuery();
+        return $user->companies()
+            ->getQuery();
     }
 
     public static function findByUser(User $user): Builder
@@ -71,7 +72,8 @@ final class Company extends Model
             return self::query();
         }
 
-        return self::query()->where(['user_id' => $user->id]);
+        return self::query()
+            ->where(['user_id' => $user->id]);
     }
 
     public function user(): BelongsTo
@@ -86,6 +88,6 @@ final class Company extends Model
 
     public function getFormattedCreatedAtAttribute(): string
     {
-        return Carbon::createFromTimestamp($this->created_at)->toFormattedDateString();
+        return $this->created_at->toFormattedDateString();
     }
 }

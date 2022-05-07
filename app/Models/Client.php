@@ -42,7 +42,7 @@ final class Client extends Model
 {
     protected $hidden = [
         'user_id',
-        'company_id'
+        'company_id',
     ];
 
     protected $fillable = [
@@ -53,7 +53,7 @@ final class Client extends Model
         'zip_code',
         'place',
         'phone_number',
-        'company_id'
+        'company_id',
     ];
 
     protected $casts = [
@@ -120,6 +120,6 @@ final class Client extends Model
 
     public function getFormattedCreatedAtAttribute(): string
     {
-        return Carbon::createFromTimestamp($this->created_at)->toFormattedDateString();
+        return $this->created_at->toFormattedDateString();
     }
 }

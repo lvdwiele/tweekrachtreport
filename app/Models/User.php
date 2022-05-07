@@ -101,23 +101,25 @@ final class User extends Authenticatable implements MustVerifyEmail
         return $this->hasManyThrough(Report::class, Client::class);
     }
 
-    /**
-     * @return int
-     */
-    public function getReportsCount(): int
+    public function reportsThisMonth(): HasManyThrough
     {
-        $returned = 0;
-        $clients = $this->clients()
-            ->with('report')
-            ->get();
+        return $this->reports()
+            ->whereYear('reports.created_at', '=', now()->year)
+            ->whereMonth('reports.created_at', '=', now()->month);
+    }
 
-        foreach ($clients as $client) {
-            if ($client->report !== null) {
-                $returned++;
-            }
-        }
+    public function reportsPreviousMonth(): HasManyThrough
+    {
+        return $this->reports()
+            ->whereYear('reports.created_at', '=', now()->subMonth()->year)
+            ->whereMonth('reports.created_at', '=', now()->subMonth()->month);
+    }
 
-        return $returned;
+    public function reportsTwoMonthsAgo(): HasManyThrough
+    {
+        return $this->reports()
+            ->whereYear('reports.created_at', '=', now()->subMonths(2)->year)
+            ->whereMonth('reports.created_at', '=', now()->subMonths(2)->month);
     }
 
     /**
@@ -140,61 +142,8 @@ final class User extends Authenticatable implements MustVerifyEmail
         return $this->role_id === Role::ROLE_ADMIN;
     }
 
-    public function getReportsCountAttribute(): int
-    {
-        return $this->clients()
-            ->with([
-                'report' => function (Builder $query) {
-                    $query->where('report.id', '!=', null);
-                },
-            ])
-            ->count();
-    }
-
-    public function getReportsCountFromThisMonthAttribute(): int
-    {
-        $currentMonth = Carbon::now()
-            ->month;
-        $currentYear = Carbon::now()
-            ->year;
-
-        return $this->reports()
-            ->whereYear('reports.created_at', '=', $currentYear)
-            ->whereMonth('reports.created_at', '=', $currentMonth)
-            ->count();
-    }
-
-    public function getReportsCountFromPreviousMonthAttribute(): int
-    {
-        $currentMonth = Carbon::now()
-            ->subMonth()
-            ->month;
-        $currentYear = Carbon::now()
-            ->year;
-
-        return $this->reports()
-            ->whereYear('reports.created_at', '=', $currentYear)
-            ->whereMonth('reports.created_at', '=', $currentMonth)
-            ->count();
-    }
-
-    public function getReportsCountFromTwoMonthsAgoAttribute(): int
-    {
-        $currentMonth = Carbon::now()
-            ->subMonths(2)
-            ->month;
-        $currentYear = Carbon::now()
-            ->year;
-
-        return $this->reports()
-            ->whereYear('reports.created_at', '=', $currentYear)
-            ->whereMonth('reports.created_at', '=', $currentMonth)
-            ->count();
-    }
-
     public function getFormattedCreatedAtAttribute(): string
     {
-        return Carbon::createFromTimestamp($this->created_at)
-            ->toFormattedDateString();
+        return $this->created_at->toFormattedDateString();
     }
 }

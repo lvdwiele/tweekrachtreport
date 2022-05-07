@@ -60,6 +60,11 @@ div.dt-buttons {
     cursor: pointer;
 }
 
+.totals-row {
+    border-top: 2px solid #000;
+    font-weight: bold;
+}
+
 .dashboard-active {
     background: rgba($dark, .2);
 }
