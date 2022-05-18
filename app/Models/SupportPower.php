@@ -6,6 +6,7 @@ namespace App\Models;
 
 use App\Tweekracht\Helpers\PowerColorHelper;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * Class SupportPower
@@ -20,13 +21,28 @@ use Illuminate\Database\Eloquent\Model;
  */
 final class SupportPower extends Model
 {
-    public function getDisplayNameAttribute(): string
-    {
-        return $this->type . ': ' . $this->power;
-    }
-
     public function getColorAttribute(): string
     {
         return resolve(PowerColorHelper::class)->getColorByType($this->type);
+    }
+
+    public function firstSupportPowerCombinations(): HasMany
+    {
+        return $this->hasMany(Combination::class, 'first_support_power_id');
+    }
+
+    public function secondSupportPowerCombinations(): HasMany
+    {
+        return $this->hasMany(Combination::class, 'second_support_power_id');
+    }
+
+    public function firstSupportPower2Combinations(): HasMany
+    {
+        return $this->hasMany(Combination::class, 'first_support_power_id_2');
+    }
+
+    public function secondSupportPower2Combinations(): HasMany
+    {
+        return $this->hasMany(Combination::class, 'second_support_power_id_2');
     }
 }

@@ -6,6 +6,7 @@ namespace App\Models;
 
 use App\Tweekracht\Helpers\PowerColorHelper;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * Class CorePower
@@ -19,13 +20,18 @@ use Illuminate\Database\Eloquent\Model;
  */
 final class CorePower extends Model
 {
-    public function getDisplayNameAttribute(): string
-    {
-        return $this->type . ': ' . $this->power . ', ' . '( kaart: ' . $this->card_number . ' )';
-    }
-
     public function getColorAttribute(): string
     {
         return resolve(PowerColorHelper::class)->getColorByType($this->type);
+    }
+
+    public function firstCorePowerCombinations(): HasMany
+    {
+        return $this->hasMany(Combination::class, 'first_core_power_id');
+    }
+
+    public function secondCorePowerCombinations(): HasMany
+    {
+        return $this->hasMany(Combination::class, 'second_core_power_id');
     }
 }

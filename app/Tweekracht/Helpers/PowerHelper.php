@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Tweekracht\Helpers;
 
+use App\Models\Combination;
 use App\Models\CorePower;
 use App\Models\SupportPower;
 use DB;
@@ -16,10 +17,9 @@ use Illuminate\Database\Eloquent\Model;
  */
 class PowerHelper
 {
-    private function getCorePowersSupportPowers(CorePower $firstCorePower, CorePower $secondCorePower): ?object
+    private function getCorePowersSupportPowers(CorePower $firstCorePower, CorePower $secondCorePower): ?Combination
     {
-        return DB::table('core_powers_support_powers')
-            ->where('first_core_power_id', $firstCorePower->id)
+        return Combination::where('first_core_power_id', $firstCorePower->id)
             ->where('second_core_power_id', $secondCorePower->id)
             ->first();
     }
@@ -33,17 +33,17 @@ class PowerHelper
      */
     public function getFirstSupportPowers(CorePower $firstCorePower, CorePower $secondCorePower): Collection
     {
-        $model = $this->getCorePowersSupportPowers($firstCorePower, $secondCorePower);
+        $combination = $this->getCorePowersSupportPowers($firstCorePower, $secondCorePower);
         $collection = new Collection();
 
-        if ($model === null) {
+        if ($combination === null) {
             return $collection;
         }
 
-        $collection->push(SupportPower::query()->find($model->first_support_power_id));
+        $collection->push(SupportPower::find($combination->first_support_power_id));
 
-        if ($model->second_support_power_id !== null) {
-            $collection->push(SupportPower::query()->find($model->second_support_power_id));
+        if ($combination->second_support_power_id !== null) {
+            $collection->push(SupportPower::find($combination->second_support_power_id));
         }
 
         return $collection;
@@ -58,17 +58,17 @@ class PowerHelper
      */
     public function getSecondSupportPowers(CorePower $firstCorePower, CorePower $secondCorePower): Collection
     {
-        $model = $this->getCorePowersSupportPowers($firstCorePower, $secondCorePower);
+        $combination = $this->getCorePowersSupportPowers($firstCorePower, $secondCorePower);
         $collection = new Collection();
 
-        if ($model === null) {
+        if ($combination === null) {
             return $collection;
         }
 
-        $collection->push(SupportPower::query()->find($model->first_support_power_id_2));
+        $collection->push(SupportPower::find($combination->first_support_power_id_2));
 
-        if ($model->second_support_power_id_2 !== null) {
-            $collection->push(SupportPower::query()->find($model->second_support_power_id_2));
+        if ($combination->second_support_power_id_2 !== null) {
+            $collection->push(SupportPower::find($combination->second_support_power_id_2));
         }
 
         return $collection;
@@ -87,7 +87,7 @@ class PowerHelper
                 'upperPower' => $secondSupportPower->power,
                 'bottomPower' => $firstSupportPower->power,
                 'upperColor' => $secondSupportPower->color,
-                'bottomColor' => $firstSupportPower->color
+                'bottomColor' => $firstSupportPower->color,
             ];
         }
 
@@ -95,7 +95,7 @@ class PowerHelper
             'upperPower' => $firstSupportPower->power,
             'bottomPower' => $secondSupportPower->power,
             'upperColor' => $firstSupportPower->color,
-            'bottomColor' => $secondSupportPower->color
+            'bottomColor' => $secondSupportPower->color,
         ];
     }
 

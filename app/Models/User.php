@@ -5,9 +5,8 @@ declare(strict_types=1);
 namespace App\Models;
 
 use App\Mail\UserVerificationMail;
-use Carbon\Carbon;
+use Filament\Models\Contracts\FilamentUser;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -36,7 +35,7 @@ use Illuminate\Notifications\Notifiable;
  * @property Collection $clients
  * @property Collection $reports
  */
-final class User extends Authenticatable implements MustVerifyEmail
+final class User extends Authenticatable implements FilamentUser, MustVerifyEmail
 {
     use Notifiable;
     use HasFactory;
@@ -144,5 +143,10 @@ final class User extends Authenticatable implements MustVerifyEmail
     public function getFormattedCreatedAtAttribute(): string
     {
         return $this->created_at->toFormattedDateString();
+    }
+
+    public function canAccessFilament(): bool
+    {
+        return $this->isAdmin();
     }
 }

@@ -41,7 +41,17 @@ class PowerColorHelper
             self::TYPE_DREAMING => '#fbba1b',
             self::TYPE_SHARING => '#007949',
             self::TYPE_DOING => '#3161aa',
-            self::TYPE_DARING => '#e41a16'
+            self::TYPE_DARING => '#e41a16',
+        ];
+    }
+
+    public static function getTypes(): array
+    {
+        return [
+            self::TYPE_DREAMING => self::TYPE_DREAMING,
+            self::TYPE_SHARING => self::TYPE_SHARING,
+            self::TYPE_DOING => self::TYPE_DOING,
+            self::TYPE_DARING => self::TYPE_DARING,
         ];
     }
 }
