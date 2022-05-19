@@ -68,11 +68,14 @@ class CorePowerResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('type')
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('card_number')
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('power')
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable(),
             ])
             ->filters([
                 SelectFilter::make('type')

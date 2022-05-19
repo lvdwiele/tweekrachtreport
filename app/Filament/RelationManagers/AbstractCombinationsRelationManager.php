@@ -67,17 +67,23 @@ abstract class AbstractCombinationsRelationManager extends HasManyRelationManage
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('firstCorePower.display_name')
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('secondCorePower.display_name')
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('firstSupportPower.display_name')
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('secondSupportPower.display_name')
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('firstSupportPower2.display_name')
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('secondSupportPower2.display_name')
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable(),
             ])
             ->filters([
                 //
