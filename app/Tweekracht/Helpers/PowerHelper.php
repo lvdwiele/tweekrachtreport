@@ -19,9 +19,27 @@ class PowerHelper
 {
     private function getCorePowersSupportPowers(CorePower $firstCorePower, CorePower $secondCorePower): ?Combination
     {
-        return Combination::where('first_core_power_id', $firstCorePower->id)
+        $combination = Combination::where('first_core_power_id', $firstCorePower->id)
             ->where('second_core_power_id', $secondCorePower->id)
             ->first();
+
+        /**
+         * If the combination does not exist. It's okay to look for 'other' combination which
+         * use the same power (but have a different card number). These result in the same combinations.
+         */
+        if (!$combination) {
+            $firstCorePowerReplacement = CorePower::where('power', $firstCorePower->power)
+                ->where('id', '<>', $firstCorePower->id)
+                ->first();
+            $secondCorePowerReplacement = CorePower::where('power', $secondCorePower->power)
+                ->where('id', '<>', $secondCorePower->id)
+                ->first();
+            $combination = Combination::where('first_core_power_id', $firstCorePowerReplacement?->id ?? $secondCorePower->id)
+                ->where('second_core_power_id', $secondCorePowerReplacement?->id ?? $secondCorePower->id)
+                ->first();
+        }
+
+        return $combination;
     }
 
     /**
