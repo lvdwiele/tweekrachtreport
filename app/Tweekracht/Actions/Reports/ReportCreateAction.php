@@ -16,7 +16,6 @@ final class ReportCreateAction
     {
         /** @var Report $report */
         $report = $client->report()->create([
-            'user_id' => $client->user->id,
             'file_status' => Report::$FILE_STATUS_IN_THE_MAKE
         ]);
 

@@ -31,7 +31,7 @@ final class Report extends Model
     public static int $FILE_STATUS_ERROR = 3;
 
     protected $fillable = [
-        'user_id',
+        'client_id',
         'file_status',
     ];
 
