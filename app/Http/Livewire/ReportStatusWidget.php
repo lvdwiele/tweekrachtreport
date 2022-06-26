@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Jobs\Report\StoreReportPdfInFileSystem;
 use App\Models\Report;
 use App\Tweekracht\Actions\Reports\ReportDeleteAction;
+use App\Tweekracht\Html\Alert;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 
@@ -38,6 +39,14 @@ class ReportStatusWidget extends Component
 
     public function destroy(ReportDeleteAction $reportDeleteAction)
     {
-        ($reportDeleteAction)($this->report);
+        $result = ($reportDeleteAction)($this->report);
+
+        if (!$result) {
+            return redirect()->back()
+                ->with(Alert::DANGER, __('report.delete.messages.fail'));
+        }
+
+        return redirect()->route('reports')
+            ->with(Alert::SUCCESS, __('report.delete.messages.success'));
     }
 }

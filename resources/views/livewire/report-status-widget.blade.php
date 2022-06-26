@@ -16,7 +16,7 @@
         {{ $report->file_status_text }}
     </span>
     <hr>
-    <div class="row" wire:poll.500ms>
+    <div class="row" wire:poll.2000ms>
         <div class="col-md-6 mb-3">
             <a class="btn btn-success btn-block"
                href="{{ route('clients.show', [$report->client]) }}">
