@@ -84,7 +84,7 @@ return [
     */
 
     'waits' => [
-        'redis:default' => 60,
+        'redis:default' => 500,
     ],
 
     /*
@@ -171,7 +171,7 @@ return [
             'balance' => 'auto',
             'maxProcesses' => 1,
             'memory' => 128,
-            'tries' => 1,
+            'tries' => 5,
             'nice' => 0,
             'timeout' => 60 * 60,
         ],
