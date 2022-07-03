@@ -14,7 +14,7 @@ class DispatchNewJobsForReportsInTheMakeCommand extends Command
 
     public function handle()
     {
-        Report::where('status', Report::$FILE_STATUS_IN_THE_MAKE)
+        Report::where('file_status', Report::$FILE_STATUS_IN_THE_MAKE)
             ->get()
             ->each(function (Report $report) {
                 StoreReportPdfInFileSystem::dispatch($report);
