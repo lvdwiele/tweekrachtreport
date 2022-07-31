@@ -7,9 +7,8 @@ namespace App\Tweekracht\Helpers;
 use App\Models\Combination;
 use App\Models\CorePower;
 use App\Models\SupportPower;
-use DB;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class PowerHelper
@@ -28,14 +27,25 @@ class PowerHelper
          * use the same power (but have a different card number). These result in the same combinations.
          */
         if (!$combination) {
-            $firstCorePowerReplacement = CorePower::where('power', $firstCorePower->power)
-                ->where('id', '<>', $firstCorePower->id)
+            $combination = Combination::whereHas('firstCorePower', function (Builder $query) use ($firstCorePower) {
+                $query->where('power', $firstCorePower->power);
+            })
+                ->whereHas('secondCorePower', function (Builder $query) use ($secondCorePower) {
+                    $query->where('power', $secondCorePower->power);
+                })
                 ->first();
-            $secondCorePowerReplacement = CorePower::where('power', $secondCorePower->power)
-                ->where('id', '<>', $secondCorePower->id)
-                ->first();
-            $combination = Combination::where('first_core_power_id', $firstCorePowerReplacement?->id ?? $secondCorePower->id)
-                ->where('second_core_power_id', $secondCorePowerReplacement?->id ?? $secondCorePower->id)
+        }
+
+        /**
+         * If it's still not found, try it the other way around
+         */
+        if (!$combination) {
+            $combination = Combination::whereHas('firstCorePower', function (Builder $query) use ($secondCorePower) {
+                $query->where('power', $secondCorePower->power);
+            })
+                ->whereHas('secondCorePower', function (Builder $query) use ($firstCorePower) {
+                    $query->where('power', $firstCorePower->power);
+                })
                 ->first();
         }
 
