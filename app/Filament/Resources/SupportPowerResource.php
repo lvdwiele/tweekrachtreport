@@ -54,6 +54,11 @@ class SupportPowerResource extends Resource
                 Forms\Components\Textarea::make('description')
                     ->required()
                     ->maxLength(65535),
+                Forms\Components\TextInput::make('card_number')
+                    ->numeric()
+                    ->step(0.1)
+                    ->minValue(0)
+                    ->nullable(),
             ]);
     }
 
@@ -65,6 +70,9 @@ class SupportPowerResource extends Resource
                     ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('power')
+                    ->sortable()
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('card_number')
                     ->sortable()
                     ->searchable(),
             ])

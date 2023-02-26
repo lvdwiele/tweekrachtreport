@@ -8,19 +8,21 @@ use App\Tweekracht\Helpers\PowerColorHelper;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-/**
- * Class SupportPower
- * @package App\Models
- *
- * @property int $id
- * @property string $type
- * @property string $power
- * @property string $description
- *
- * @property string $color
- */
 final class SupportPower extends Model
 {
+    public $timestamps = false;
+
+    protected $fillable = [
+        'type',
+        'power',
+        'description',
+        'card_number',
+    ];
+
+    protected $casts = [
+        'card_number' => 'float',
+    ];
+
     public function getColorAttribute(): string
     {
         return resolve(PowerColorHelper::class)->getColorByType($this->type);

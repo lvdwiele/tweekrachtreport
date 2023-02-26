@@ -31,10 +31,6 @@ class StoreReportPdfInFileSystem implements ShouldQueue
             resolve(PowerHelper::class),
             resolve(PowerColorHelper::class),
             $client,
-            $client->corePowers->first(),
-            $client->corePowers->last(),
-            $client->supportPowers->first(),
-            $client->supportPowers->last()
         );
 
         $pdf = $domPdf->loadView('report.pdf', [

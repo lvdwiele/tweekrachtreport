@@ -102,23 +102,11 @@ class PowerHelper
         return $collection;
     }
 
-    public function getUpperAndBottomValues(SupportPower $firstSupportPower, SupportPower $secondSupportPower): array
+    public function getUpperAndBottomValues(
+        SupportPower $firstSupportPower,
+        SupportPower $secondSupportPower
+    ): array
     {
-        if ($secondSupportPower->type === PowerColorHelper::TYPE_DOING
-            || ($firstSupportPower->type === PowerColorHelper::TYPE_DARING
-                && $secondSupportPower->type === PowerColorHelper::TYPE_DREAMING)
-            || ($firstSupportPower->type === PowerColorHelper::TYPE_SHARING
-                && $secondSupportPower->type === PowerColorHelper::TYPE_DARING)
-            || ($firstSupportPower->type === PowerColorHelper::TYPE_SHARING
-                && $secondSupportPower->type === PowerColorHelper::TYPE_DREAMING)) {
-            return [
-                'upperPower' => $secondSupportPower->power,
-                'bottomPower' => $firstSupportPower->power,
-                'upperColor' => $secondSupportPower->color,
-                'bottomColor' => $firstSupportPower->color,
-            ];
-        }
-
         return [
             'upperPower' => $firstSupportPower->power,
             'bottomPower' => $secondSupportPower->power,

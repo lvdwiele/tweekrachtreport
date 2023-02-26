@@ -8,16 +8,6 @@ use App\Tweekracht\Helpers\PowerColorHelper;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-/**
- * Class CorePower
- * @package App\Models
- *
- * @property int $id
- * @property string $type
- * @property string $card_number
- * @property string $power
- * @property string $description
- */
 final class CorePower extends Model
 {
     public function getColorAttribute(): string
