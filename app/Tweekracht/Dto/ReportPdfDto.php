@@ -23,8 +23,9 @@ final class ReportPdfDto
         public Client           $client,
     )
     {
-        $this->firstCorePower = $this->client->corePowers->first();
-        $this->secondCorePower = $this->client->corePowers->last();
+        $sortedCorePowers = $this->client->corePowers->sortBy('card_number');
+        $this->firstCorePower = $sortedCorePowers->first();
+        $this->secondCorePower = $sortedCorePowers->last();
 
         // The first support power is determined as follows:
         // Determine what the 'shortest' distance between the core powers on the card circle
