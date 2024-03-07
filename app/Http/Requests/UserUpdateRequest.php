@@ -42,6 +42,7 @@ final class UserUpdateRequest extends UserRequest
                 Rule::unique('users')->ignore($user),
                 'email'
             ],
+            'phone_number' => 'nullable',
             'role_id' => 'required'
         ];
     }

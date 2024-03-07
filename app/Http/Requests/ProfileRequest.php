@@ -25,6 +25,7 @@ final class ProfileRequest extends UserRequest
                 Rule::unique('users')->ignore($user),
                 'email'
             ],
+            'phone_number' => 'nullable',
             'password' => 'nullable|confirmed|min:5'
         ];
     }
