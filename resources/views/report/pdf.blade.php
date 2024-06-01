@@ -37,7 +37,7 @@
 <div class="page page-0">
     @include('report.pdf.partials.logo')
     <div class="bg-blue text-center">
-        <div class="h1 text-white">De beste<br>Route naar<br>je beste ik</div>
+        <div class="h1 text-white">De snelste<br>Route naar<br>je beste ik</div>
         <img src="{{ asset('/images/rapport/alle_kaarten.png') }}" />
         <div class="h6 text-white">
             Kernkrachten van {{ $reportPdf->client->full_name }}
