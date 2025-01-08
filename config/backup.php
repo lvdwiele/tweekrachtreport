@@ -168,11 +168,11 @@ return [
         'notifiable' => \Spatie\Backup\Notifications\Notifiable::class,
 
         'mail' => [
-            'to' => 'martijn@code337.rocks',
+            'to' => 'l.vandewiele@positievekettingreactie.nl',
 
             'from' => [
-                'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
-                'name' => env('MAIL_FROM_NAME', 'Example'),
+                'address' => env('MAIL_FROM_ADDRESS', 'l.vandewiele@positievekettingreactie.nl'),
+                'name' => env('MAIL_FROM_NAME', 'PKR Laraval'),
             ],
         ],
 
